@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奥特曼IP卡牌放置项目 · 游戏框架图</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#fff; --ink:#1b2432; --ink2:#4b5768; --ink3:#7c8798;
+    --line:#e3e8f0; --brand:#2f5bea;
+    --m1:#185FA5; --m1bg:#E6F1FB;
+    --m2:#A32D2D; --m2bg:#FCEBEB;
+    --m3:#534AB7; --m3bg:#EEEDFE;
+    --m4:#3B6D11; --m4bg:#EAF3DE;
+    --m5:#0F6E56; --m5bg:#E1F5EE;
+    --m6:#854F0B; --m6bg:#FAEEDA;
+    --m7:#993556; --m7bg:#FBEAF0;
+    --bar:#1b2a4a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1117; --card:#171a21; --ink:#e6e8ee; --ink2:#b3b9c6; --ink3:#7c8798;
+      --line:#262b35; --brand:#5b8cff;
+      --m1:#7cc0f0; --m1bg:#12293d;
+      --m2:#f0908f; --m2bg:#3a1a1a;
+      --m3:#b6aef6; --m3bg:#241f45;
+      --m4:#a8d47e; --m4bg:#1e2f12;
+      --m5:#7ad4b8; --m5bg:#0f2b23;
+      --m6:#e0b56e; --m6bg:#33260d;
+      --m7:#f0a9c4; --m7bg:#3a1a28;
+      --bar:#0b0f1a;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px;}
+  /* site bar (看板式顶栏) */
+  .sitebar{background:var(--bar);color:#fff;margin:0 0 20px;}
+  .sitebar .inner{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;
+    align-items:center;gap:16px;flex-wrap:wrap;font-size:12.6px;}
+  .sitebar .brand{font-weight:700;font-size:13.4px;letter-spacing:.3px;display:flex;align-items:center;gap:7px;}
+  .sitebar .brand i{width:8px;height:8px;border-radius:2px;background:#4fc3f7;display:inline-block;}
+  .sitebar nav{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;}
+  .sitebar nav a{color:#cdd6e6;text-decoration:none;border:1px solid rgba(255,255,255,.22);
+    border-radius:8px;padding:4px 12px;font-size:12.2px;}
+  .sitebar nav a.active{background:#2f5bea;border-color:#2f5bea;color:#fff;font-weight:600;}
+  .sitebar .meta{color:#9fb0cc;font-size:12px;}
+  /* hero */
+  .hero{background:linear-gradient(135deg,#1f3a8a 0%,#2f5bea 45%,#7a3fd6 100%);
+    color:#fff;border-radius:18px;padding:30px 32px;box-shadow:0 12px 30px rgba(47,91,234,.22);}
+  .hero h1{margin:0 0 6px;font-size:23px;letter-spacing:.5px;}
+  .hero p.sub{margin:0;opacity:.92;font-size:13.6px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+    padding:5px 12px;border-radius:999px;font-size:12.4px;}
+  section{margin-top:26px;}
+  h2{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:9px;}
+  h2 .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+    border-radius:8px;background:var(--brand);color:#fff;font-size:13px;font-weight:700;flex:none;}
+  .lead{color:var(--ink2);margin:6px 0 14px;font-size:13.4px;}
+  /* nav */
+  .nav{display:flex;flex-wrap:wrap;gap:8px;}
+  .nav a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);
+    border:1px solid var(--line);background:var(--card);border-radius:10px;padding:7px 12px;font-size:12.6px;font-weight:600;}
+  .nav a i{width:9px;height:9px;border-radius:3px;display:inline-block;}
+  /* tree overview */
+  .tree-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+    box-shadow:0 2px 10px rgba(20,40,90,.04);}
+  .rootbar{display:inline-block;background:var(--m4bg);border:1px solid var(--m4);border-radius:12px;
+    padding:10px 18px;font-weight:700;font-size:13.4px;color:var(--ink);}
+  .branches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;padding-left:16px;border-left:2px solid var(--line);}
+  .bcard{border-radius:10px;padding:10px 12px;border:1px solid;}
+  .bcard .bt{font-weight:700;font-size:12.8px;margin-bottom:6px;}
+  .bcard .bl{display:flex;flex-wrap:wrap;gap:4px;}
+  .bcard .bl span{background:var(--card);border-radius:6px;padding:1px 7px;font-size:11.2px;border:1px solid;}
+  /* module blocks */
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;
+    box-shadow:0 2px 10px rgba(20,40,90,.04);border-left-width:4px;}
+  .mhead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);}
+  .mhead .mid{font-family:ui-monospace,Consolas,monospace;font-weight:800;font-size:15px;}
+  .mhead h3{margin:0;font-size:15px;font-weight:700;}
+  .mhead .mtag{margin-left:auto;font-size:11.6px;color:var(--ink3);letter-spacing:.5px;}
+  ul.lvl2{list-style:none;margin:0;padding:8px 18px 16px;}
+  ul.lvl2 > li{display:grid;grid-template-columns:178px 1fr;gap:14px;padding:8px 0;border-bottom:1px dashed var(--line);}
+  ul.lvl2 > li:last-child{border-bottom:none;}
+  ul.lvl2 > li > .b{font-weight:600;font-size:13px;display:flex;align-items:baseline;gap:7px;}
+  ul.lvl2 > li > .b::before{content:"";width:6px;height:6px;border-radius:2px;background:currentColor;flex:none;opacity:.85;transform:translateY(-1px);}
+  ul.lvl2 > li > .d{font-size:12.7px;color:var(--ink2);}
+  .tag{display:inline-block;font-size:10.8px;padding:1px 7px;border-radius:999px;background:var(--line);
+    color:var(--ink3);margin-left:6px;vertical-align:middle;}
+  .tag.later{background:#fff4de;color:#a16207;}
+  .tag.v1{background:#e9f8f0;color:#0c5b39;}
+  @media (prefers-color-scheme: dark){
+    .tag.later{background:#3a2b0a;color:#f0c674;}
+    .tag.v1{background:#0f2f1f;color:#7ad4a0;}
+  }
+  /* changelog */
+  .log{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 20px 14px;
+    box-shadow:0 2px 10px rgba(20,40,90,.04);}
+  .log li{display:grid;grid-template-columns:118px 92px 1fr;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);list-style:none;font-size:12.8px;}
+  .log li:last-child{border-bottom:none;}
+  .log .lv{font-family:ui-monospace,Consolas,monospace;font-weight:700;color:var(--brand);}
+  .log .dt{color:var(--ink3);font-size:12px;}
+  .log ul{margin:0;padding:0;}
+  footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);
+    color:var(--ink3);font-size:12px;text-align:center;}
+  @media(max-width:760px){.branches{grid-template-columns:1fr 1fr;}
+    ul.lvl2 > li{grid-template-columns:1fr;gap:2px;}
+    .log li{grid-template-columns:1fr;gap:2px;}}
+  @media print{body{background:#fff;} .hero{box-shadow:none;color:#000;background:#eef2ff;}
+    .mod,.tree-wrap,.log{box-shadow:none;break-inside:avoid;} .sitebar{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="sitebar">
+  <div class="inner">
+    <span class="brand"><i></i>奥特曼IP卡牌放置 · 项目站</span>
+    <span class="meta">最后更新：2026-10-15 ｜ 版本 v1.0</span>
+    <nav>
+      <a href="index.html" class="active">🏗️ 游戏框架图</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>奥特曼 IP 卡牌放置项目 · 游戏框架图</h1>
+    <p class="sub">七大模块结构树 ｜ 系统 · 玩法 · 数值 · 资源产出消耗 · 社交 · 英雄设计 · 剧情</p>
+    <div class="chips">
+      <span class="chip">模块：<b>7 大</b></span>
+      <span class="chip">层级：<b>模块 → 分支 → 说明</b></span>
+      <span class="chip">V1 范围：<b>不含家园·赛季</b></span>
+      <span class="chip">对标：<b>启程上线版</b></span>
+      <span class="chip">最后更新：<b>2026-10-15</b></span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="num">1</span>结构总览</h2>
+    <p class="lead">根节点下并列七大模块，每个模块再展开分支（详见第 2 节）。</p>
+    <div class="tree-wrap">
+      <span class="rootbar">奥特曼 IP 卡牌放置 · 游戏框架</span>
+      <div class="branches">
+        <div class="bcard" style="background:var(--m1bg);border-color:var(--m1);">
+          <div class="bt" style="color:var(--m1);">系统模块</div>
+          <div class="bl" style="color:var(--m1);">
+            <span style="border-color:var(--m1);">账号登录</span><span style="border-color:var(--m1);">服务框架</span>
+            <span style="border-color:var(--m1);">存档同步</span><span style="border-color:var(--m1);">新手引导</span>
+            <span style="border-color:var(--m1);">商城计费</span><span style="border-color:var(--m1);">数据埋点</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m2bg);border-color:var(--m2);">
+          <div class="bt" style="color:var(--m2);">玩法模块</div>
+          <div class="bl" style="color:var(--m2);">
+            <span style="border-color:var(--m2);">主线挂机</span><span style="border-color:var(--m2);">迷梦之域</span>
+            <span style="border-color:var(--m2);">竞技场</span><span style="border-color:var(--m2);">天穹试炼</span>
+            <span style="border-color:var(--m2);">公会玩法</span><span style="border-color:var(--m2);">世界探索</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m3bg);border-color:var(--m3);">
+          <div class="bt" style="color:var(--m3);">数值模块</div>
+          <div class="bl" style="color:var(--m3);">
+            <span style="border-color:var(--m3);">属性体系</span><span style="border-color:var(--m3);">伤害公式</span>
+            <span style="border-color:var(--m3);">成长曲线</span><span style="border-color:var(--m3);">战力计算</span>
+            <span style="border-color:var(--m3);">难度曲线</span><span style="border-color:var(--m3);">平衡验证</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m4bg);border-color:var(--m4);">
+          <div class="bt" style="color:var(--m4);">资源产出消耗</div>
+          <div class="bl" style="color:var(--m4);">
+            <span style="border-color:var(--m4);">货币体系</span><span style="border-color:var(--m4);">产出途径</span>
+            <span style="border-color:var(--m4);">消耗途径</span><span style="border-color:var(--m4);">商店体系</span>
+            <span style="border-color:var(--m4);">体力系统</span><span style="border-color:var(--m4);">通胀控制</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m5bg);border-color:var(--m5);">
+          <div class="bt" style="color:var(--m5);">社交模块</div>
+          <div class="bl" style="color:var(--m5);">
+            <span style="border-color:var(--m5);">好友系统</span><span style="border-color:var(--m5);">公会系统</span>
+            <span style="border-color:var(--m5);">聊天系统</span><span style="border-color:var(--m5);">排行榜</span>
+            <span style="border-color:var(--m5);">助战借用</span><span style="border-color:var(--m5);">师徒系统</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m6bg);border-color:var(--m6);">
+          <div class="bt" style="color:var(--m6);">英雄设计</div>
+          <div class="bl" style="color:var(--m6);">
+            <span style="border-color:var(--m6);">阵营体系</span><span style="border-color:var(--m6);">品质阶梯</span>
+            <span style="border-color:var(--m6);">职业分类</span><span style="border-color:var(--m6);">技能体系</span>
+            <span style="border-color:var(--m6);">觉醒专武</span><span style="border-color:var(--m6);">养成曲线</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m7bg);border-color:var(--m7);">
+          <div class="bt" style="color:var(--m7);">剧情模块</div>
+          <div class="bl" style="color:var(--m7);">
+            <span style="border-color:var(--m7);">世界观</span><span style="border-color:var(--m7);">主线剧情</span>
+            <span style="border-color:var(--m7);">角色小传</span><span style="border-color:var(--m7);">支线剧情</span>
+            <span style="border-color:var(--m7);">剧情演出</span><span style="border-color:var(--m7);">关卡绑定</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav" style="margin-top:14px;">
+      <a href="#m1"><i style="background:var(--m1);"></i>系统</a>
+      <a href="#m2"><i style="background:var(--m2);"></i>玩法</a>
+      <a href="#m3"><i style="background:var(--m3);"></i>数值</a>
+      <a href="#m4"><i style="background:var(--m4);"></i>资源产出消耗</a>
+      <a href="#m5"><i style="background:var(--m5);"></i>社交</a>
+      <a href="#m6"><i style="background:var(--m6);"></i>英雄设计</a>
+      <a href="#m7"><i style="background:var(--m7);"></i>剧情</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>七大模块 · 逐层拆解</h2>
+    <p class="lead">每行 = 一个二级分支（左）＋ 其下属三级要点（右）。带「V1」标记的属首发范围，「后续」为上线后扩展。</p>
+
+    <div class="mod" id="m1" style="border-left-color:var(--m1);">
+      <div class="mhead" style="background:var(--m1bg);">
+        <span class="mid" style="color:var(--m1);">01</span><h3 style="color:var(--m1);">系统模块</h3>
+        <span class="mtag">SYSTEM</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m1);">
+        <li><span class="b">账号与登录</span><span class="d">游客 / 账号 / 第三方登录 · 实名认证 · 未成年人防沉迷</span></li>
+        <li><span class="b">服务端框架</span><span class="d">网关 · 逻辑服 · 数据库 · 通信协议（长连接） · 热更新</span></li>
+        <li><span class="b">存档与同步</span><span class="d">云存档 · 断线重连 · 多端一致 · 服务端权威校验</span></li>
+        <li><span class="b">新手引导</span><span class="d">前 5 分钟体验 · 功能解锁节奏 · 强制/自由引导</span></li>
+        <li><span class="b">商城与计费</span><span class="d">月卡 · 战令 · 礼包 · 外观 · <b>概率公示</b></span></li>
+        <li><span class="b">数据埋点与看板</span><span class="d">事件上报 · 留存/付费看板 · 版本对比</span></li>
+        <li><span class="b">公告与邮件</span><span class="d">系统公告 · 奖励邮件 · 补偿机制</span></li>
+        <li><span class="b">设置与客服</span><span class="d">音画设置 · 语言 · 客服入口 · 隐私协议</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m2" style="border-left-color:var(--m2);">
+      <div class="mhead" style="background:var(--m2bg);">
+        <span class="mid" style="color:var(--m2);">02</span><h3 style="color:var(--m2);">玩法模块</h3>
+        <span class="mtag">GAMEPLAY</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m2);">
+        <li><span class="b">主线挂机<span class="tag v1">V1</span></span><span class="d">放置推图 · 挂机产出 · 扫荡 · 离线收益结算</span></li>
+        <li><span class="b">迷梦之域<span class="tag v1">V1</span></span><span class="d">梦境爬塔 · 层数奖励 · 周期重置</span></li>
+        <li><span class="b">竞技场<span class="tag v1">V1</span></span><span class="d">PVP 排名 · 防守阵容 · 每日结算</span></li>
+        <li><span class="b">荣誉对决<span class="tag v1">V1</span></span><span class="d">异步 PVP · 段位 · 荣誉币兑换</span></li>
+        <li><span class="b">天穹试炼<span class="tag v1">V1</span></span><span class="d">职业试炼 · 秘藏宝箱 · 职业限制</span></li>
+        <li><span class="b">异界魔宫<span class="tag v1">V1</span></span><span class="d">Raid / roguelike · 多队战斗 · 首领连战</span></li>
+        <li><span class="b">公会玩法<span class="tag v1">V1</span></span><span class="d">公会 Boss · 公会战 · 沙盘 · 公会任务</span></li>
+        <li><span class="b">世界探索<span class="tag v1">V1</span></span><span class="d">大地图探索 · 宝箱 · 支线触发 · 资源点</span></li>
+        <li><span class="b">日常与周常<span class="tag v1">V1</span></span><span class="d">每日任务 · 活跃度 · 周常奖励</span></li>
+        <li><span class="b">家园 / 赛季<span class="tag later">后续</span></span><span class="d">V1 不做；上线后按版本加入（家园一周年式登场、赛季模式）</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m3" style="border-left-color:var(--m3);">
+      <div class="mhead" style="background:var(--m3bg);">
+        <span class="mid" style="color:var(--m3);">03</span><h3 style="color:var(--m3);">数值模块</h3>
+        <span class="mtag">NUMERICS</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m3);">
+        <li><span class="b">属性体系</span><span class="d">基础属性 · PvE / PvP 双轨 · 阵营/职业修正 · 属性来源分层汇总</span></li>
+        <li><span class="b">伤害公式</span><span class="d">分层乘区：攻击 × 技能倍率 × 暴击 × 阵营克制 × 减伤 × 标准化修正</span></li>
+        <li><span class="b">成长曲线</span><span class="d">等级经验 · 升阶 · 装备强化 · 前期快、中期稳、后期拉长</span></li>
+        <li><span class="b">战力计算</span><span class="d">战力权重 · 评分公式 · 排行榜依据 · 推荐战力</span></li>
+        <li><span class="b">难度曲线</span><span class="d">关卡梯度 · 升-平-升-Boss 节奏 · 卡点设计</span></li>
+        <li><span class="b">平衡模型</span><span class="d">阵容矩阵 · 职业克制环 · 胜率分布 · 反无解套路</span></li>
+        <li><span class="b">数值验证</span><span class="d">木桩 DPS · 自动模拟器 · 抽样回放 · 目标区间收敛</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m4" style="border-left-color:var(--m4);">
+      <div class="mhead" style="background:var(--m4bg);">
+        <span class="mid" style="color:var(--m4);">04</span><h3 style="color:var(--m4);">资源产出消耗</h3>
+        <span class="mtag">ECONOMY</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m4);">
+        <li><span class="b">货币体系</span><span class="d">金币 · 钻石 · 体力 · 粉尘 · 招募券 · 专武材料（软/硬分层）</span></li>
+        <li><span class="b">产出途径</span><span class="d">挂机 · 关卡 · 任务 · 活动 · 充值 · 邮件发放</span></li>
+        <li><span class="b">消耗途径</span><span class="d">养成 · 抽卡 · 装备 · 刷新 · 体力消耗</span></li>
+        <li><span class="b">商店体系</span><span class="d">普通商店 · 竞技场商店 · 公会商店 · 钻石商店 · 限时商店</span></li>
+        <li><span class="b">体力系统</span><span class="d">恢复速率 · 上限 · 购买 · 赠送</span></li>
+        <li><span class="b">通胀控制</span><span class="d">产消比目标区间 · 长期回收池 · 消耗端设计</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m5" style="border-left-color:var(--m5);">
+      <div class="mhead" style="background:var(--m5bg);">
+        <span class="mid" style="color:var(--m5);">05</span><h3 style="color:var(--m5);">社交模块</h3>
+        <span class="mtag">SOCIAL</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m5);">
+        <li><span class="b">好友系统</span><span class="d">添加 · 赠送体力 · 好友助战 · 好友榜</span></li>
+        <li><span class="b">公会系统</span><span class="d">等级 · 职位权限 · 公会商店 · 公会任务 · 公会 Boss</span></li>
+        <li><span class="b">聊天系统</span><span class="d">世界 / 公会 / 私聊 · 敏感词过滤 · 举报</span></li>
+        <li><span class="b">排行榜</span><span class="d">战力榜 · 竞技榜 · 公会榜 · 爬塔榜 · 赛季榜</span></li>
+        <li><span class="b">助战借用</span><span class="d">借用英雄 · 次数限制 · 借用收益</span></li>
+        <li><span class="b">师徒与回归</span><span class="d">师徒任务 · 回归奖励 · 回归引导</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m6" style="border-left-color:var(--m6);">
+      <div class="mhead" style="background:var(--m6bg);">
+        <span class="mid" style="color:var(--m6);">06</span><h3 style="color:var(--m6);">英雄设计</h3>
+        <span class="mtag">HERO</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m6);">
+        <li><span class="b">阵营体系</span><span class="d">6 阵营 · 同阵营上阵 buff · 独立阵营（神魔式，任意阵营视作）</span></li>
+        <li><span class="b">品质阶梯</span><span class="d">抽卡两档（稀有 / 超稀有）· 养成升阶阶梯</span></li>
+        <li><span class="b">职业分类</span><span class="d">坦克 · 战士 · 游侠 · 射手 · 法师 · 辅助（6 原型）</span></li>
+        <li><span class="b">技能体系</span><span class="d"><b>全员完整 kit</b>：必杀 · 招牌技 · 主动×2 · 被动 · 形态被动（不绑稀有度）</span></li>
+        <li><span class="b">觉醒与专武</span><span class="d">觉醒解锁 · 专武改招 · 形态扩展（IP 丰富度的横向出口）</span></li>
+        <li><span class="b">获取途径</span><span class="d">招募 · 心愿单 · 商店兑换 · 联动赠送</span></li>
+        <li><span class="b">养成线</span><span class="d">等级 · 升阶 · 技能升级 · <b>装备/等级共享（无损换阵）</b></span></li>
+        <li><span class="b">美术资产</span><span class="d">立绘 · 模型 · 特效 · 动作 · <b>圆谷监修</b>（提前 2 周）</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m7" style="border-left-color:var(--m7);">
+      <div class="mhead" style="background:var(--m7bg);">
+        <span class="mid" style="color:var(--m7);">07</span><h3 style="color:var(--m7);">剧情模块</h3>
+        <span class="mtag">STORY</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m7);">
+        <li><span class="b">世界观</span><span class="d">时代 / 地点 / 核心矛盾 · 主线设定基调</span></li>
+        <li><span class="b">主线剧情</span><span class="d">章节推进 · 三幕结构（起-承-转-合）· 剧情关卡绑定</span></li>
+        <li><span class="b">角色小传</span><span class="d">英雄个人故事 · 图鉴解锁 · 好感度</span></li>
+        <li><span class="b">支线剧情</span><span class="d">探索支线 · 活动剧情 · 角色专属章节</span></li>
+        <li><span class="b">剧情演出</span><span class="d">对话框 · CG · Live2D / 3D 演出 · 语音</span></li>
+        <li><span class="b">关卡绑定</span><span class="d">剧情解锁关卡 · 条件触发 · 首次通关演出</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>变更记录</h2>
+    <p class="lead">本页框架图后续更新在此登记，便于回溯与对齐。</p>
+    <ul class="log">
+      <li>
+        <span class="lv">v1.0</span>
+        <span class="dt">2026-10-15</span>
+        <span>首版发布：七大模块（系统 / 玩法 / 数值 / 资源产出消耗 / 社交 / 英雄设计 / 剧情）结构树，含二级分支与三级要点；标注 V1 范围（不含家园·赛季）。</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    奥特曼IP卡牌放置项目 · 游戏框架图 ｜ 本内容为设计草稿参考，正式落地前需经团队评审与合规审核。
+  </footer>
+</div>
+</body>
+</html>
