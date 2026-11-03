@@ -18,6 +18,7 @@
     --m5:#0F6E56; --m5bg:#E1F5EE;
     --m6:#854F0B; --m6bg:#FAEEDA;
     --m7:#993556; --m7bg:#FBEAF0;
+    --m8:#0E7490; --m8bg:#E0F2F7;
     --bar:#1b2a4a;
   }
   @media (prefers-color-scheme: dark){
@@ -31,6 +32,7 @@
       --m5:#7ad4b8; --m5bg:#0f2b23;
       --m6:#e0b56e; --m6bg:#33260d;
       --m7:#f0a9c4; --m7bg:#3a1a28;
+      --m8:#67d4e8; --m8bg:#0c2a33;
       --bar:#0b0f1a;
     }
   }
@@ -71,7 +73,7 @@
   /* tree overview */
   .tree-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
     box-shadow:0 2px 10px rgba(20,40,90,.04);}
-  .rootbar{display:inline-block;background:var(--m4bg);border:1px solid var(--m4);border-radius:12px;
+  .rootbar{display:inline-block;background:var(--m8bg);border:1px solid var(--m8);border-radius:12px;
     padding:10px 18px;font-weight:700;font-size:13.4px;color:var(--ink);}
   .branches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;padding-left:16px;border-left:2px solid var(--line);}
   .bcard{border-radius:10px;padding:10px 12px;border:1px solid;}
@@ -95,9 +97,11 @@
     color:var(--ink3);margin-left:6px;vertical-align:middle;}
   .tag.later{background:#fff4de;color:#a16207;}
   .tag.v1{background:#e9f8f0;color:#0c5b39;}
+  .tag.core{background:#e7f0ff;color:#185fa5;}
   @media (prefers-color-scheme: dark){
     .tag.later{background:#3a2b0a;color:#f0c674;}
     .tag.v1{background:#0f2f1f;color:#7ad4a0;}
+    .tag.core{background:#12293d;color:#7cc0f0;}
   }
   /* changelog */
   .log{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 20px 14px;
@@ -121,7 +125,7 @@
 <div class="sitebar">
   <div class="inner">
     <span class="brand"><i></i>奥特曼IP卡牌放置 · 项目站</span>
-    <span class="meta">最后更新：2026-10-15 ｜ 版本 v1.0</span>
+    <span class="meta">最后更新：2026-11-03 ｜ 版本 v1.1</span>
     <nav>
       <a href="index.html" class="active">🏗️ 游戏框架图</a>
     </nav>
@@ -132,19 +136,20 @@
 
   <div class="hero">
     <h1>奥特曼 IP 卡牌放置项目 · 游戏框架图</h1>
-    <p class="sub">七大模块结构树 ｜ 系统 · 玩法 · 数值 · 资源产出消耗 · 社交 · 英雄设计 · 剧情</p>
+    <p class="sub">八大模块结构树 ｜ 系统 · 玩法 · 数值 · 资源产出消耗 · 社交 · 英雄设计 · 剧情 · 基地</p>
     <div class="chips">
-      <span class="chip">模块：<b>7 大</b></span>
+      <span class="chip">模块：<b>8 大</b></span>
       <span class="chip">层级：<b>模块 → 分支 → 说明</b></span>
-      <span class="chip">V1 范围：<b>不含家园·赛季</b></span>
+      <span class="chip">基地 = <b>永久长线轴（V1）</b></span>
+      <span class="chip">赛季 = <b>后续</b></span>
       <span class="chip">对标：<b>启程上线版</b></span>
-      <span class="chip">最后更新：<b>2026-10-15</b></span>
+      <span class="chip">最后更新：<b>2026-11-03</b></span>
     </div>
   </div>
 
   <section>
     <h2><span class="num">1</span>结构总览</h2>
-    <p class="lead">根节点下并列七大模块，每个模块再展开分支（详见第 2 节）。</p>
+    <p class="lead">根节点下并列八大模块，每个模块再展开分支（详见第 2 节）。基地为收束枢纽 + 永久长线轴，统一承接挂机与大地图产出。</p>
     <div class="tree-wrap">
       <span class="rootbar">奥特曼 IP 卡牌放置 · 游戏框架</span>
       <div class="branches">
@@ -201,7 +206,15 @@
           <div class="bl" style="color:var(--m7);">
             <span style="border-color:var(--m7);">世界观</span><span style="border-color:var(--m7);">主线剧情</span>
             <span style="border-color:var(--m7);">角色小传</span><span style="border-color:var(--m7);">支线剧情</span>
-            <span style="border-color:var(--m7);">剧情演出</span><span style="border-color:var(--m7);">关卡绑定</span>
+            <span style="border-color:var(--m7);">剧情演出</span><span style="border-color:var(--m7);">基地重建</span>
+          </div>
+        </div>
+        <div class="bcard" style="background:var(--m8bg);border-color:var(--m8);">
+          <div class="bt" style="color:var(--m8);">基地模块</div>
+          <div class="bl" style="color:var(--m8);">
+            <span style="border-color:var(--m8);">基地重建</span><span style="border-color:var(--m8);">永久长线轴</span>
+            <span style="border-color:var(--m8);">装备工坊</span><span style="border-color:var(--m8);">建筑设施</span>
+            <span style="border-color:var(--m8);">活动绑定</span><span style="border-color:var(--m8);">繁荣展示</span>
           </div>
         </div>
       </div>
@@ -214,12 +227,13 @@
       <a href="#m5"><i style="background:var(--m5);"></i>社交</a>
       <a href="#m6"><i style="background:var(--m6);"></i>英雄设计</a>
       <a href="#m7"><i style="background:var(--m7);"></i>剧情</a>
+      <a href="#m8"><i style="background:var(--m8);"></i>基地</a>
     </div>
   </section>
 
   <section>
-    <h2><span class="num">2</span>七大模块 · 逐层拆解</h2>
-    <p class="lead">每行 = 一个二级分支（左）＋ 其下属三级要点（右）。带「V1」标记的属首发范围，「后续」为上线后扩展。</p>
+    <h2><span class="num">2</span>八大模块 · 逐层拆解</h2>
+    <p class="lead">每行 = 一个二级分支（左）＋ 其下属三级要点（右）。带「V1」标记的属首发范围，「核心」为长线轴关键模块，「后续」为上线后扩展。</p>
 
     <div class="mod" id="m1" style="border-left-color:var(--m1);">
       <div class="mhead" style="background:var(--m1bg);">
@@ -253,7 +267,7 @@
         <li><span class="b">公会玩法<span class="tag v1">V1</span></span><span class="d">公会 Boss · 公会战 · 沙盘 · 公会任务</span></li>
         <li><span class="b">世界探索<span class="tag v1">V1</span></span><span class="d">大地图探索 · 宝箱 · 支线触发 · 资源点</span></li>
         <li><span class="b">日常与周常<span class="tag v1">V1</span></span><span class="d">每日任务 · 活跃度 · 周常奖励</span></li>
-        <li><span class="b">家园 / 赛季<span class="tag later">后续</span></span><span class="d">V1 不做；上线后按版本加入（家园一周年式登场、赛季模式）</span></li>
+        <li><span class="b">赛季<span class="tag later">后续</span></span><span class="d">V1 不做；上线后按版本加入（赛季模式、赛季养成线）</span></li>
       </ul>
     </div>
 
@@ -328,10 +342,29 @@
       <ul class="lvl2" style="color:var(--m7);">
         <li><span class="b">世界观</span><span class="d">时代 / 地点 / 核心矛盾 · 主线设定基调</span></li>
         <li><span class="b">主线剧情</span><span class="d">章节推进 · 三幕结构（起-承-转-合）· 剧情关卡绑定</span></li>
+        <li><span class="b">基地重建<span class="tag core">核心</span></span><span class="d">剧情起点＝基地重建 · 衔接大地图剧情与挂机开启（详见 08 基地模块）</span></li>
         <li><span class="b">角色小传</span><span class="d">英雄个人故事 · 图鉴解锁 · 好感度</span></li>
         <li><span class="b">支线剧情</span><span class="d">探索支线 · 活动剧情 · 角色专属章节</span></li>
         <li><span class="b">剧情演出</span><span class="d">对话框 · CG · Live2D / 3D 演出 · 语音</span></li>
         <li><span class="b">关卡绑定</span><span class="d">剧情解锁关卡 · 条件触发 · 首次通关演出</span></li>
+      </ul>
+    </div>
+
+    <div class="mod" id="m8" style="border-left-color:var(--m8);">
+      <div class="mhead" style="background:var(--m8bg);">
+        <span class="mid" style="color:var(--m8);">08</span><h3 style="color:var(--m8);">基地（家园）模块</h3>
+        <span class="mtag">BASE / HOMELAND</span>
+      </div>
+      <ul class="lvl2" style="color:var(--m8);">
+        <li><span class="b">定位<span class="tag core">核心</span></span><span class="d">收束枢纽 + 永久长线成长轴 · 统一承接挂机与大地图产出（避免 AFK 孤立闭环）</span></li>
+        <li><span class="b">剧情起点</span><span class="d">剧情开始＝基地重建 · 衔接大地图剧情与挂机模块开启 · 基地为中枢、两侧接入玩法</span></li>
+        <li><span class="b">永久长线轴</span><span class="d">跨赛季继承 · 账号级资产 · 赛季不重置（对抗 AFK「赛季一更、成长归零」）</span></li>
+        <li><span class="b">装备工坊<span class="tag core">核心</span></span><span class="d">等级锚定宝箱 · 每日固定产出 · 卡关缺口补给站（装备主产地点）</span></li>
+        <li><span class="b">建筑设施群</span><span class="d">观测塔（挂机回流）· 传送门（探索回流）· 训练场（战斗回流）· 档案库（赛季回流）</span></li>
+        <li><span class="b">装备产出迁移</span><span class="d">突破宝箱保底 · 日常挂机转产家园体力 · 工坊额外产装备（装备=临时补丁，非硬门槛）</span></li>
+        <li><span class="b">资源回流</span><span class="d">挂机 / 大地图 / 赛季结算 多源汇入 → 全域回馈（多源汇入 + 全域回馈 + 赛季豁免）</span></li>
+        <li><span class="b">活动界面绑定</span><span class="d">部分玩法入口挂基地等级 / 建筑 · 收束枢纽落到实处（非纯挂机进度解锁）</span></li>
+        <li><span class="b">长线展示</span><span class="d">账号增长过程 · 英雄收集度 · 繁荣度变化（可预览的长线成长目标）</span></li>
       </ul>
     </div>
   </section>
@@ -340,6 +373,11 @@
     <h2><span class="num">3</span>变更记录</h2>
     <p class="lead">本页框架图后续更新在此登记，便于回溯与对齐。</p>
     <ul class="log">
+      <li>
+        <span class="lv">v1.1</span>
+        <span class="dt">2026-11-03</span>
+        <span>新增「基地（家园）模块」为第八大模块，纳入剧情起点（基地重建）、永久长线轴、装备工坊、建筑设施群、装备产出迁移、资源回流、活动界面绑定与繁荣展示；「家园」从玩法模块的「后续」上调为 V1 核心（赛季仍为后续）。</span>
+      </li>
       <li>
         <span class="lv">v1.0</span>
         <span class="dt">2026-10-15</span>
