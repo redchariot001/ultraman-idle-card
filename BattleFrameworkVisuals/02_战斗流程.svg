@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="925" viewBox="0 0 1240 925" role="img" aria-labelledby="title desc">
+<title id="title">02  从布阵到结算</title><desc id="desc">战前策略对两类模式都有效；局中手动权限按模式区分。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="925" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">02  从布阵到结算</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">战前策略对两类模式都有效；局中手动权限按模式区分。</text>
+<g data-card="① 选择玩法" data-x="32" data-y="130" data-w="265" data-h="112">
+<rect x="32" y="130" width="265" height="112" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="22" fill="#526677" font-weight="700" text-anchor="start">① 选择玩法</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">读取地图、胜负与操作权限</text>
+</g>
+<g data-card="② 配置阵容" data-x="350" data-y="130" data-w="390" data-h="112">
+<rect x="350" y="130" width="390" height="112" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="368" y="164" font-size="22" fill="#8c5b0c" font-weight="700" text-anchor="start">② 配置阵容</text>
+<text x="368" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">5 人、合法格位、回响与变身器</text>
+<text x="368" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">保存 EXP 顺位、大招联动</text>
+</g>
+<g data-card="③ 生成参战快照" data-x="793" data-y="130" data-w="415" data-h="112">
+<rect x="793" y="130" width="415" height="112" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="811" y="164" font-size="22" fill="#285b9e" font-weight="700" text-anchor="start">③ 生成参战快照</text>
+<text x="811" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查资格与模式规则</text>
+<text x="811" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">固定英雄、成长、地图与策略</text>
+</g>
+<path d="M297 186 L350 186" class="connector" marker-end="url(#arrow)"/>
+<path d="M740 186 L793 186" class="connector" marker-end="url(#arrow)"/>
+<path d="M1000 242 L1000 273 L322 273 L322 281" class="connector" marker-end="url(#arrow)"/>
+<path d="M1000 273 L918 273 L918 281" class="connector" marker-end="url(#arrow)"/>
+<path d="M322 318 L322 333" class="connector" marker-end="url(#arrow)"/>
+<path d="M918 318 L918 333" class="connector" marker-end="url(#arrow)"/>
+<text x="322" y="307" font-size="20" fill="#167b65" font-weight="700" text-anchor="middle">允许手动的挂机 / 剧情</text>
+<text x="918" y="307" font-size="20" fill="#7654a2" font-weight="700" text-anchor="middle">PVP / 排行榜 PVE</text>
+<g data-card="④ 初始化战场" data-x="52" data-y="333" data-w="540" data-h="112">
+<rect x="52" y="333" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="367" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">④ 初始化战场</text>
+<text x="70" y="399" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">摆放单位、应用开场效果</text>
+<text x="70" y="426" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">初始化个人能量、共享 EXP 与当局次数</text>
+</g>
+<g data-card="④ 服务器初始化并演算" data-x="648" data-y="333" data-w="540" data-h="112">
+<rect x="648" y="333" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="367" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">④ 服务器初始化并演算</text>
+<text x="666" y="399" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">使用同一份快照、规则与随机序列</text>
+<text x="666" y="426" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">全程自动，按战前配置调度技能</text>
+</g>
+<path d="M322 445 L322 478" class="connector" marker-end="url(#arrow)"/>
+<path d="M918 445 L918 478" class="connector" marker-end="url(#arrow)"/>
+<g data-card="⑤ 按逻辑拍推进" data-x="52" data-y="478" data-w="540" data-h="112">
+<rect x="52" y="478" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="512" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑤ 按逻辑拍推进</text>
+<text x="70" y="544" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普通行为自动；允许玩家提交大招 / EXP</text>
+<text x="70" y="571" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">状态与命中结算后检查结束条件</text>
+</g>
+<g data-card="⑤ 服务器确认结果" data-x="648" data-y="478" data-w="540" data-h="112">
+<rect x="648" y="478" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="512" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">⑤ 服务器确认结果</text>
+<text x="666" y="544" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">达到结束条件 → 保存结果与战斗记录</text>
+<text x="666" y="571" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按战斗 ID 结算奖励、积分与排名</text>
+</g>
+<path d="M322 590 L322 623" class="connector" marker-end="url(#arrow)"/>
+<path d="M918 590 L918 623" class="connector" marker-end="url(#arrow)"/>
+<g data-card="⑥ 结束与结算" data-x="52" data-y="623" data-w="540" data-h="112">
+<rect x="52" y="623" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="657" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑥ 结束与结算</text>
+<text x="70" y="689" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">胜负、时限、平局由玩法规则判定</text>
+<text x="70" y="716" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">在线奖励由服务端确认</text>
+</g>
+<g data-card="⑥ 客户端还原战斗" data-x="648" data-y="623" data-w="540" data-h="112">
+<rect x="648" y="623" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="657" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">⑥ 客户端还原战斗</text>
+<text x="666" y="689" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">输入快照 + 种子，或兼容事件记录</text>
+<text x="666" y="716" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">播放过程和战报，结果以服务端为准</text>
+</g>
+<path d="M322 735 L322 772 L620 772 L620 807" class="connector" marker-end="url(#arrow)"/>
+<path d="M918 735 L918 772 L620 772" class="connector"/>
+<g data-card="⑦ 查看战报 → 调整阵容 → 再挑战" data-x="340" data-y="807" data-w="560" data-h="80">
+<rect x="340" y="807" width="560" height="80" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="358" y="841" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">⑦ 查看战报 → 调整阵容 → 再挑战</text>
+</g>
+</svg>
