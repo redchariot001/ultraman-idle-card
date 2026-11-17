@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="978" viewBox="0 0 1240 978" role="img" aria-labelledby="title desc">
+<title id="title">08  局内运行循环与行动选择</title><desc id="desc">这是本项目的调度设计；同一逻辑拍内按稳定顺序执行，动画只负责表现。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="978" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">08  局内运行循环与行动选择</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">这是本项目的调度设计；同一逻辑拍内按稳定顺序执行，动画只负责表现。</text>
+<g data-card="① 推进逻辑时钟与已存在效果" data-x="32" data-y="130" data-w="540" data-h="106">
+<rect x="32" y="130" width="540" height="106" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">① 推进逻辑时钟与已存在效果</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">持续状态、位移、射弹、技能阶段到期事件</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按固定顺序处理，更新可行动状态</text>
+</g>
+<g data-card="② 生成有效施法请求" data-x="668" data-y="130" data-w="540" data-h="106">
+<rect x="668" y="130" width="540" height="106" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="686" y="164" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">② 生成有效施法请求</text>
+<text x="686" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">玩家请求 / 个人大招与联动 / 共享 EXP</text>
+<text x="686" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">暂不扣资源，先检查状态与执行窗口</text>
+</g>
+<path d="M572 183 L668 183" class="connector" marker-end="url(#arrow)"/>
+<path d="M938 236 L938 287" class="connector" marker-end="url(#arrow)"/>
+<g data-card="③ 选择本拍动作" data-x="668" data-y="287" data-w="540" data-h="107">
+<rect x="668" y="287" width="540" height="107" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="686" y="321" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">③ 选择本拍动作</text>
+<text x="686" y="353" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">已经提交的技能遵守中断与继续规则</text>
+<text x="686" y="380" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">空闲或可接管时，按优先级接受合法请求</text>
+</g>
+<g data-card="④ 执行并结算效果" data-x="32" data-y="287" data-w="540" data-h="107">
+<rect x="32" y="287" width="540" height="107" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="321" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">④ 执行并结算效果</text>
+<text x="50" y="353" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">提交时扣资源；在逻辑命中点处理结算</text>
+<text x="50" y="380" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡、控制和派生效果进入统一事件顺序</text>
+</g>
+<path d="M668 341 L572 341" class="connector" marker-end="url(#arrow)"/>
+<path d="M302 394 L302 443" class="connector" marker-end="url(#arrow)"/>
+<g data-card="⑤ 检查胜负与本拍完成" data-x="32" data-y="443" data-w="540" data-h="107">
+<rect x="32" y="443" width="540" height="107" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="50" y="477" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑤ 检查胜负与本拍完成</text>
+<text x="50" y="509" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">结束条件满足 → 固定最终结果</text>
+<text x="50" y="536" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">否则进入下一拍；渲染按逻辑状态插值</text>
+</g>
+<path d="M32 495 L18 495 L18 183 L32 183" class="connector" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<g data-card="表现层" data-x="668" data-y="443" data-w="540" data-h="107">
+<rect x="668" y="443" width="540" height="107" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="686" y="477" font-size="23" fill="#526677" font-weight="700" text-anchor="start">表现层</text>
+<text x="686" y="509" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">动画、特效、镜头、血条与音效</text>
+<text x="686" y="536" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不使用动画片段长度改写命中或胜负</text>
+</g>
+<path d="M572 495 L668 495" class="connector" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="32" y="610" font-size="23" fill="#162b3b" font-weight="700" text-anchor="start">单位行动选择 · 默认优先顺序</text>
+<g data-card="1  强制行为" data-x="32" data-y="640" data-w="216" data-h="126">
+<rect x="32" y="640" width="216" height="126" rx="12" fill="#fff0e9" stroke="#aa5335" stroke-opacity="0.24"/>
+<text x="50" y="674" font-size="18" fill="#aa5335" font-weight="700" text-anchor="start">1  强制行为</text>
+<text x="50" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡、硬控、强制位移</text>
+</g>
+<path d="M248 703 L272 703" class="connector" marker-end="url(#arrow)"/>
+<g data-card="2  已提交技能" data-x="272" data-y="640" data-w="216" data-h="126">
+<rect x="272" y="640" width="216" height="126" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="290" y="674" font-size="18" fill="#7654a2" font-weight="700" text-anchor="start">2  已提交技能</text>
+<text x="290" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按当前阶段继续或中断</text>
+</g>
+<path d="M488 703 L512 703" class="connector" marker-end="url(#arrow)"/>
+<g data-card="3  合法大招 / EXP" data-x="512" data-y="640" data-w="216" data-h="126">
+<rect x="512" y="640" width="216" height="126" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="530" y="674" font-size="18" fill="#8c5b0c" font-weight="700" text-anchor="start">3  合法大招 / EXP</text>
+<text x="530" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按联动与请求</text>
+<text x="530" y="733" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">优先级调度</text>
+</g>
+<path d="M728 703 L752 703" class="connector" marker-end="url(#arrow)"/>
+<g data-card="4  基础技能" data-x="752" data-y="640" data-w="216" data-h="126">
+<rect x="752" y="640" width="216" height="126" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="770" y="674" font-size="18" fill="#285b9e" font-weight="700" text-anchor="start">4  基础技能</text>
+<text x="770" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">条件满足则发起</text>
+</g>
+<path d="M968 703 L992 703" class="connector" marker-end="url(#arrow)"/>
+<g data-card="5  普攻 / 寻路 / 待机" data-x="992" data-y="640" data-w="216" data-h="126">
+<rect x="992" y="640" width="216" height="126" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="1010" y="674" font-size="18" fill="#167b65" font-weight="700" text-anchor="start">5  普攻 / 寻路 / 待机</text>
+<text x="1010" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查目标、距离</text>
+<text x="1010" y="733" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与位置可达性</text>
+</g>
+<g data-card="EXP 与个人大招冲突时" data-x="32" data-y="803" data-w="1176" data-h="90">
+<rect x="32" y="803" width="1176" height="90" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="837" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 与个人大招冲突时</text>
+<text x="50" y="869" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">原型默认：已启动联动或不可打断动作先执行；EXP 保持满条，等待合法窗口。</text>
+</g>
+<rect x="32" y="921" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="951" font-size="18" fill="#526677" font-weight="400" text-anchor="start">每拍都复核存活、控制、费用与目标；进入队列不代表获得霸体、无敌或必中。</text>
+</svg>
