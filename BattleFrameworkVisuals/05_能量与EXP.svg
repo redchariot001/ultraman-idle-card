@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="985" viewBox="0 0 1240 985" role="img" aria-labelledby="title desc">
+<title id="title">05  三条触发通道 · EXP 的一次完整循环</title><desc id="desc">个人大招、共享 EXP、变身器分别判断资源与条件。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="985" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">05  三条触发通道 · EXP 的一次完整循环</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">个人大招、共享 EXP、变身器分别判断资源与条件。</text>
+<g data-card="个人大招 · 各自充能" data-x="32" data-y="130" data-w="350" data-h="142">
+<rect x="32" y="130" width="350" height="142" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">个人大招 · 各自充能</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">本人的能量满且可施法</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">点英雄头像 → 选目标</text>
+<text x="50" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">自动：单放或按联动队列</text>
+</g>
+<g data-card="小队 EXP · 全队充能" data-x="445" data-y="130" data-w="350" data-h="142">
+<rect x="445" y="130" width="350" height="142" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="463" y="164" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">小队 EXP · 全队充能</text>
+<text x="463" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">共享满条；本局尚有可释放者</text>
+<text x="463" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">点 EXP → 选英雄 → 选目标</text>
+<text x="463" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">自动：按默认或保存顺位</text>
+</g>
+<g data-card="变身器 · 独立触发" data-x="858" data-y="130" data-w="350" data-h="142">
+<rect x="858" y="130" width="350" height="142" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="164" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">变身器 · 独立触发</text>
+<text x="876" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">开场、定时或满足事件条件</text>
+<text x="876" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按设备自己的冷却或充能</text>
+<text x="876" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不占用共享 EXP 能量</text>
+</g>
+<text x="32" y="320" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">共享 EXP 流程（原型默认：满条施放 1 人，然后重新充能）</text>
+<g data-card="① 队员贡献有效事件" data-x="32" data-y="350" data-w="300" data-h="122">
+<rect x="32" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">① 队员贡献有效事件</text>
+<text x="50" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按配置累计到共享条</text>
+<text x="50" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">多段与召唤贡献有独立限制</text>
+</g>
+<g data-card="② 满条 → 保持就绪" data-x="470" data-y="350" data-w="300" data-h="122">
+<rect x="470" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="488" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">② 满条 → 保持就绪</text>
+<text x="488" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">满条后停止累积</text>
+<text x="488" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查未使用且已解锁的英雄</text>
+</g>
+<g data-card="③ 选择释放者与目标" data-x="908" data-y="350" data-w="300" data-h="122">
+<rect x="908" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="926" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">③ 选择释放者与目标</text>
+<text x="926" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">手动三步 / 自动按顺位</text>
+<text x="926" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">受控、死亡、目标条件需复核</text>
+</g>
+<path d="M332 411 L470 411" class="connector" marker-end="url(#arrow)"/>
+<path d="M770 411 L908 411" class="connector" marker-end="url(#arrow)"/>
+<path d="M1058 472 L1058 516 L620 516 L620 552" class="connector" marker-end="url(#arrow)"/>
+<g data-card="④ 到达施放提交点" data-x="350" data-y="552" data-w="540" data-h="116">
+<rect x="350" y="552" width="540" height="116" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="368" y="586" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">④ 到达施放提交点</text>
+<text x="368" y="618" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">复核通过 → 清空共享条 + 记录该英雄已用</text>
+<text x="368" y="645" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">提交前取消或失效：不消耗、不占次数</text>
+</g>
+<path d="M620 668 L620 704 L322 704 L322 740" class="connector" marker-end="url(#arrow)"/>
+<path d="M620 704 L918 704 L918 740" class="connector" marker-end="url(#arrow)"/>
+<g data-card="还有未使用 EXP 的上阵英雄" data-x="52" data-y="740" data-w="540" data-h="111">
+<rect x="52" y="740" width="540" height="111" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="774" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">还有未使用 EXP 的上阵英雄</text>
+<text x="70" y="806" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">继续充能 → 下一轮按规则选择</text>
+<text x="70" y="833" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡后复活不清除“本局已用”记录</text>
+</g>
+<g data-card="全部已使用 / 本局无解锁者" data-x="648" data-y="740" data-w="540" data-h="111">
+<rect x="648" y="740" width="540" height="111" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="666" y="774" font-size="23" fill="#526677" font-weight="700" text-anchor="start">全部已使用 / 本局无解锁者</text>
+<text x="666" y="806" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">停止充能，按钮显示不可用原因</text>
+<text x="666" y="833" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普通技能、个人大招照常执行</text>
+</g>
+<path d="M52 796 L18 796 L18 411 L32 411" class="connector" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<rect x="32" y="889" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="919" font-size="18" fill="#526677" font-weight="400" text-anchor="start">自动暂不可用：有限等待后检查下一位；若仍无合法释放者则保留满条。</text>
+<rect x="32" y="938" width="1176" height="47" rx="8" fill="#fff4d9"/>
+<text x="48" y="968" font-size="18" fill="#8c5b0c" font-weight="400" text-anchor="start">单次战斗内每名角色最多释放 1 次 EXP；转波、死亡、复活不会重置次数。</text>
+</svg>
