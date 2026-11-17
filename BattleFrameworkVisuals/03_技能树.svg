@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1010" viewBox="0 0 1240 1010" role="img" aria-labelledby="title desc">
+<title id="title">03  角色技能树 · 1 普攻 + 6 技能</title><desc id="desc">树枝表示能力归属，均可随养成解锁；不是互斥天赋树。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="1010" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">03  角色技能树 · 1 普攻 + 6 技能</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">树枝表示能力归属，均可随养成解锁；不是互斥天赋树。</text>
+<g data-card="角色技能" data-x="32" data-y="460" data-w="178" data-h="116">
+<rect x="32" y="460" width="178" height="116" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="494" font-size="24" fill="#526677" font-weight="700" text-anchor="start">角色技能</text>
+<text x="50" y="526" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">1 个普攻</text>
+<text x="50" y="553" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">6 个技能条目</text>
+</g>
+<path d="M210 518 L240 518" class="connector"/>
+<path d="M240 175 L240 859" class="connector"/>
+<path d="M240 175 L275 175" class="connector" marker-end="url(#arrow)"/>
+<g data-card="普攻" data-x="275" data-y="129" data-w="260" data-h="92">
+<rect x="275" y="129" width="260" height="92" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="293" y="163" font-size="25" fill="#526677" font-weight="700" text-anchor="start">普攻</text>
+<text x="293" y="195" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">基础攻击</text>
+</g>
+<path d="M535 175 L575 175" class="connector" marker-end="url(#arrow)"/>
+<g data-card="初始可用" data-x="575" data-y="129" data-w="633" data-h="92">
+<rect x="575" y="129" width="633" height="92" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="593" y="163" font-size="21" fill="#526677" font-weight="700" text-anchor="start">初始可用</text>
+<text x="593" y="195" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">属性成长影响基础效果；回响等可定向强化。</text>
+</g>
+<path d="M240 289 L275 289" class="connector" marker-end="url(#arrow)"/>
+<g data-card="个人大招" data-x="275" data-y="243" data-w="260" data-h="92">
+<rect x="275" y="243" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="277" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">个人大招</text>
+<text x="293" y="309" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 289 L575 289" class="connector" marker-end="url(#arrow)"/>
+<g data-card="Lv.1 开启；等级提升技能档位*" data-x="575" data-y="243" data-w="633" data-h="92">
+<rect x="575" y="243" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="277" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.1 开启；等级提升技能档位*</text>
+<text x="593" y="309" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">消耗本人能量；觉醒通常强化此技能。</text>
+</g>
+<path d="M240 403 L275 403" class="connector" marker-end="url(#arrow)"/>
+<g data-card="技能 1" data-x="275" data-y="357" data-w="260" data-h="92">
+<rect x="275" y="357" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="391" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">技能 1</text>
+<text x="293" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 403 L575 403" class="connector" marker-end="url(#arrow)"/>
+<g data-card="Lv.11 开启；等级提升技能档位*" data-x="575" data-y="357" data-w="633" data-h="92">
+<rect x="575" y="357" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="391" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.11 开启；等级提升技能档位*</text>
+<text x="593" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">可为自动主动、被动或条件触发技能。</text>
+</g>
+<path d="M240 517 L275 517" class="connector" marker-end="url(#arrow)"/>
+<g data-card="技能 2" data-x="275" data-y="471" data-w="260" data-h="92">
+<rect x="275" y="471" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="505" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">技能 2</text>
+<text x="293" y="537" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 517 L575 517" class="connector" marker-end="url(#arrow)"/>
+<g data-card="Lv.31 开启；等级提升技能档位*" data-x="575" data-y="471" data-w="633" data-h="92">
+<rect x="575" y="471" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="505" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.31 开启；等级提升技能档位*</text>
+<text x="593" y="537" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与技能 1 共存，按角色定位设计。</text>
+</g>
+<path d="M240 631 L275 631" class="connector" marker-end="url(#arrow)"/>
+<g data-card="EXP 技能" data-x="275" data-y="585" data-w="260" data-h="92">
+<rect x="275" y="585" width="260" height="92" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="293" y="619" font-size="25" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 技能</text>
+<text x="293" y="651" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 631 L575 631" class="connector" marker-end="url(#arrow)"/>
+<g data-card="传说+解锁；蓝瓜子升级" data-x="575" data-y="585" data-w="633" data-h="92">
+<rect x="575" y="585" width="633" height="92" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="593" y="619" font-size="21" fill="#8c5b0c" font-weight="700" text-anchor="start">传说+解锁；蓝瓜子升级</text>
+<text x="593" y="651" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">同一条目包含 EXP 主动 + 专精被动。</text>
+</g>
+<path d="M240 745 L275 745" class="connector" marker-end="url(#arrow)"/>
+<g data-card="专武技能" data-x="275" data-y="699" data-w="260" data-h="92">
+<rect x="275" y="699" width="260" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="293" y="733" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">专武技能</text>
+<text x="293" y="765" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 745 L575 745" class="connector" marker-end="url(#arrow)"/>
+<g data-card="神话+开启专武；强化分档生效*" data-x="575" data-y="699" data-w="633" data-h="92">
+<rect x="575" y="699" width="633" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="593" y="733" font-size="21" fill="#7654a2" font-weight="700" text-anchor="start">神话+开启专武；强化分档生效*</text>
+<text x="593" y="765" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通常强化已有招式；可按角色追加机制。</text>
+</g>
+<path d="M240 859 L275 859" class="connector" marker-end="url(#arrow)"/>
+<g data-card="觉醒技能" data-x="275" data-y="813" data-w="260" data-h="92">
+<rect x="275" y="813" width="260" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="293" y="847" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">觉醒技能</text>
+<text x="293" y="879" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 859 L575 859" class="connector" marker-end="url(#arrow)"/>
+<g data-card="巅峰+解锁" data-x="575" data-y="813" data-w="633" data-h="92">
+<rect x="575" y="813" width="633" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="593" y="847" font-size="21" fill="#7654a2" font-weight="700" text-anchor="start">巅峰+解锁</text>
+<text x="593" y="879" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通常强化个人大招；不新增一条能量。</text>
+</g>
+<rect x="32" y="944" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="974" font-size="18" fill="#526677" font-weight="400" text-anchor="start">* 等级门槛与专武节点是沿用《启程》的本项目建议基准；EXP 和觉醒门槛按已定需求。</text>
+</svg>
