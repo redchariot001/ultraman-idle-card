@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="966" viewBox="0 0 1240 966" role="img" aria-labelledby="title desc">
+<title id="title">06  玩家如何选择成长方向</title><desc id="desc">固定机制逐步解锁；资源优先级与装配组合构成培养差异。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="966" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">06  玩家如何选择成长方向</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">固定机制逐步解锁；资源优先级与装配组合构成培养差异。</text>
+<g data-card="固定定位" data-x="32" data-y="130" data-w="350" data-h="151">
+<rect x="32" y="130" width="350" height="151" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#526677" font-weight="700" text-anchor="start">固定定位</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">职业、阵营、角色原生技能</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">品阶门槛与技能解锁节点</text>
+<text x="50" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">升级不会自由转职</text>
+</g>
+<g data-card="可选择的投入" data-x="445" data-y="130" data-w="350" data-h="151">
+<rect x="445" y="130" width="350" height="151" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="463" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">可选择的投入</text>
+<text x="463" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">先培养哪位英雄</text>
+<text x="463" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">先升 EXP、专武还是回响</text>
+<text x="463" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">职业装备的材料分配</text>
+</g>
+<g data-card="可选择的配置" data-x="858" data-y="130" data-w="350" data-h="151">
+<rect x="858" y="130" width="350" height="151" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="164" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">可选择的配置</text>
+<text x="876" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">已获得且适配的角色回响</text>
+<text x="876" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">小队变身器与队友组合</text>
+<text x="876" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">站位、EXP 顺位、大招联动</text>
+</g>
+<text x="32" y="328" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">方向模板 · 仅供符合角色原有能力的英雄选择</text>
+<g data-card="普攻持续输出" data-x="32" data-y="356" data-w="350" data-h="143">
+<rect x="32" y="356" width="350" height="143" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="390" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">普攻持续输出</text>
+<text x="50" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普攻型回响 + 对应专武效果</text>
+<text x="50" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化稳定输出与普攻附带机制</text>
+</g>
+<g data-card="技能爆发" data-x="445" data-y="356" data-w="350" data-h="143">
+<rect x="445" y="356" width="350" height="143" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="463" y="390" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">技能爆发</text>
+<text x="463" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">大招 / 普通技能型回响</text>
+<text x="463" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">配合专武、觉醒与联动窗口</text>
+</g>
+<g data-card="EXP 关键爆发" data-x="858" data-y="356" data-w="350" data-h="143">
+<rect x="858" y="356" width="350" height="143" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="876" y="390" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 关键爆发</text>
+<text x="876" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">优先投入 EXP 等级</text>
+<text x="876" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通过顺位决定出手窗口</text>
+</g>
+<g data-card="控制与负面辅助" data-x="32" data-y="536" data-w="350" data-h="143">
+<rect x="32" y="536" width="350" height="143" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="50" y="570" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">控制与负面辅助</text>
+<text x="50" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有控制、减防等效果</text>
+<text x="50" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">联动先手，为后续输出创造条件</text>
+</g>
+<g data-card="承伤与保护" data-x="445" data-y="536" data-w="350" data-h="143">
+<rect x="445" y="536" width="350" height="143" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="463" y="570" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">承伤与保护</text>
+<text x="463" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有护盾、减伤或保护</text>
+<text x="463" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">生存投入 + 站位 + 队伍设备</text>
+</g>
+<g data-card="治疗与增益" data-x="858" data-y="536" data-w="350" data-h="143">
+<rect x="858" y="536" width="350" height="143" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="570" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">治疗与增益</text>
+<text x="876" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有治疗或增益技能</text>
+<text x="876" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与队友、变身器形成支持组合</text>
+</g>
+<path d="M620 281 L620 315" class="connector"/>
+<g data-card="形成“角色培养方案”，而非新增一套天赋系统" data-x="32" data-y="746" data-w="1176" data-h="107">
+<rect x="32" y="746" width="1176" height="107" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="780" font-size="25" fill="#8c5b0c" font-weight="700" text-anchor="start">形成“角色培养方案”，而非新增一套天赋系统</text>
+<text x="50" y="812" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">同一角色的分化来自：投入先后 + 持有回响选择 + 队伍策略；多个成长系统可以同时提升。</text>
+</g>
+<rect x="32" y="899" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="929" font-size="18" fill="#526677" font-weight="400" text-anchor="start">英雄能走哪些方向，由其实际技能与回响选项决定；不会让所有职业都获得治疗、控制或突袭。</text>
+</svg>
