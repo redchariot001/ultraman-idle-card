@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="850" viewBox="0 0 1240 850" role="img" aria-labelledby="title desc">
+<title id="title">01  战斗系统总览</title><desc id="desc">永久养成形成角色能力；战前配置组合队伍；局内自动执行。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="850" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">01  战斗系统总览</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">永久养成形成角色能力；战前配置组合队伍；局内自动执行。</text>
+<g data-card="角色永久养成" data-x="32" data-y="135" data-w="350" data-h="146">
+<rect x="32" y="135" width="350" height="146" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="50" y="169" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">角色永久养成</text>
+<text x="50" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">品阶 → 解锁机制与属性成长</text>
+<text x="50" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP、专武、觉醒 → 技能成长</text>
+<text x="50" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">角色回响 → 定向强化</text>
+</g>
+<g data-card="等级与职业装备" data-x="445" data-y="135" data-w="350" data-h="146">
+<rect x="445" y="135" width="350" height="146" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="463" y="169" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">等级与职业装备</text>
+<text x="463" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">共鸣等级 → 基础属性与等级技能</text>
+<text x="463" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">六职业各一套装备</text>
+<text x="463" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">常驻 / 赛季项按玩法生效</text>
+</g>
+<g data-card="小队变身器" data-x="858" data-y="135" data-w="350" data-h="146">
+<rect x="858" y="135" width="350" height="146" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="169" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">小队变身器</text>
+<text x="876" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">每队装配 1 件（原型默认）</text>
+<text x="876" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">队伍 BUFF、触发技或机制</text>
+<text x="876" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">拥有及养成永久保留</text>
+</g>
+<path d="M207 281 L207 321 L620 321" class="connector"/>
+<path d="M620 281 L620 321 L620 321" class="connector"/>
+<path d="M1033 281 L1033 321 L620 321" class="connector"/>
+<path d="M620 321 L620 353" class="connector" marker-end="url(#arrow)"/>
+<g data-card="战前配置 · 5 人小队" data-x="270" data-y="353" data-w="700" data-h="132">
+<rect x="270" y="353" width="700" height="132" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="288" y="387" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">战前配置 · 5 人小队</text>
+<text x="288" y="419" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">上阵英雄与格位 ｜ 角色回响 ｜ 小队变身器</text>
+<text x="288" y="446" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP 释放顺位 ｜ 个人大招联动策略</text>
+</g>
+<path d="M620 485 L620 530" class="connector" marker-end="url(#arrow)"/>
+<g data-card="六边格自动战斗" data-x="70" data-y="530" data-w="1100" data-h="132">
+<rect x="70" y="530" width="1100" height="132" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="88" y="564" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">六边格自动战斗</text>
+<text x="88" y="596" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">个人能量 → 个人大招 ｜ 共享能量 → EXP ｜ 变身器 → 独立触发</text>
+<text x="88" y="623" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">统一处理：状态 / AI / 技能 / 位移 / 命中 / 伤害 / 派生效果</text>
+</g>
+<path d="M620 662 L620 704 L329 704 L329 735" class="connector" marker-end="url(#arrow)"/>
+<path d="M620 704 L919 704 L919 735" class="connector" marker-end="url(#arrow)"/>
+<g data-card="普通挂机 / 部分剧情" data-x="70" data-y="735" data-w="520" data-h="83">
+<rect x="70" y="735" width="520" height="83" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="88" y="769" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">普通挂机 / 部分剧情</text>
+<text x="88" y="801" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">可手动选择个人大招与 EXP</text>
+</g>
+<g data-card="PVP / 排行榜 PVE" data-x="650" data-y="735" data-w="520" data-h="83">
+<rect x="650" y="735" width="520" height="83" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="668" y="769" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">PVP / 排行榜 PVE</text>
+<text x="668" y="801" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">全自动 · 服务器定结果 · 客户端还原</text>
+</g>
+</svg>
