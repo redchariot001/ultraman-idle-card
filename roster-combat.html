@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>奥特曼星域之光 · 初版角色大名单 &amp; 战斗系统框架</title>
+<style>
+:root{--ink:#162b3b;--muted:#526677;--accent:#167b65;--line:#dde5e8;--bg:#f1f4f5}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 "Microsoft YaHei UI","Microsoft YaHei",sans-serif}a{color:#1e638d;text-underline-offset:3px}header{padding:42px 38px 32px;max-width:1280px;margin:auto}header .eyebrow{color:var(--accent);font-size:14px;font-weight:700;letter-spacing:2px}h1{font-size:38px;line-height:1.3;margin:12px 0}header p{color:var(--muted);margin:10px 0}nav{display:flex;flex-wrap:wrap;gap:9px 22px;margin-top:20px}nav a{font-size:15px;text-decoration:none}main{max-width:1280px;margin:auto;padding:0 20px 60px}section{background:white;padding:30px 24px;margin:0 0 24px;border-radius:14px;border:1px solid var(--line);scroll-margin-top:20px}h2{font-size:25px;margin:0 0 8px}p{margin:10px 0}.lead{color:var(--muted);margin-bottom:22px}.figure{margin:18px 0 28px;max-width:100%;overflow:auto}.figure svg{display:block;width:100%;height:auto}.figlink{text-align:right;font-size:13px;color:var(--muted);margin-top:5px}.table-wrap{max-width:100%;overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:12px}th{color:#285b9e;background:#f1f6fb}td:first-child{font-weight:600;min-width:150px}details{border-top:1px solid var(--line);padding-top:15px;margin-top:16px}summary{font-weight:700;color:var(--accent);cursor:pointer}details[open] summary{margin-bottom:16px}.key{display:flex;gap:12px;flex-wrap:wrap}.key span{padding:5px 12px;border-radius:7px;font-size:14px;background:#eaf2ff}.key span:nth-child(2){background:#fff4d9}.key span:nth-child(3){background:#f0ebfc}footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 20px 40px}button{font:inherit;padding:7px 14px;background:#167b65;border:0;border-radius:6px;color:white;cursor:pointer}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #daaa37;outline-offset:4px}
+@media(max-width:700px){header{padding:25px 20px}h1{font-size:29px}main{padding:0 10px 30px}section{padding:22px 12px}.figure svg{min-width:900px}.figure{border-bottom:1px solid var(--line)}nav{gap:9px 16px}td,th{padding:9px}h2{font-size:22px}}
+@media print{body{background:white;font-size:11pt}header{padding:0;margin-bottom:20px}nav,.figlink,.screen-only{display:none}main{padding:0}section{border:0;border-radius:0;padding:0;margin:24px 0;break-inside:avoid}details{display:none}section.compact{break-inside:auto}.figure{overflow:visible;margin:12px 0}.figure svg{min-width:0;width:100%;max-height:240mm}h2{break-after:avoid}footer{display:none}@page{size:A4 landscape;margin:12mm}}
+</style>
+
+/* ==== Tab 分页（本页新增） ==== */
+.tabbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;gap:10px;padding:12px 20px;box-shadow:0 2px 10px rgba(22,43,59,.06)}
+.tabbar .brand{font-weight:800;color:var(--ink);font-size:16px;margin-right:8px;align-self:center;
+  letter-spacing:1px}
+.tabbtn{font:inherit;font-weight:700;font-size:15px;padding:9px 20px;border-radius:8px;
+  border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer}
+.tabbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.panel{display:none}
+.panel.active{display:block}
+html{scroll-padding-top:72px}
+h3{font-size:19px;margin:26px 0 8px;color:var(--ink)}
+blockquote{border-left:4px solid var(--accent);background:#f0f7f5;margin:14px 0;padding:10px 16px;
+  color:#37596a;border-radius:0 8px 8px 0}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul,ol{padding-left:24px;margin:10px 0}
+li{margin:4px 0}
+.tabbar .brand span{color:var(--accent)}
+.doc-ref{color:#8a97a3;border-bottom:1px dashed #c3cdd6;cursor:default}
+@media(max-width:700px){.tabbar{padding:10px 12px;gap:6px}.tabbar .brand{display:none}
+  .tabbtn{padding:8px 13px;font-size:14px}}
+@media print{.tabbar{display:none}.panel{display:none!important}.panel.active{display:block!important}
+  html{scroll-padding-top:0}}
+
+</head>
+<body>
+<div class="tabbar">
+  <div class="brand">奥特曼<span>星域之光</span></div>
+  <button class="tabbtn active" data-tab="roster" onclick="switchTab('roster')">初版角色大名单</button>
+  <button class="tabbtn" data-tab="combat" onclick="switchTab('combat')">战斗系统框架图解</button>
+</div>
+
+<div class="panel active" id="panel-roster">
+<header><div class="eyebrow">ULTRAMAN PROJECT / INITIAL ROSTER</div><h1>奥特曼星域之光 · 初版角色大名单（52 人）</h1><p>文档版本：v1.9 ｜ 状态：待评审 ｜ 日期：2026-11-18</p><p>六阵营 · 六职业 · 稀有 / 超稀有两档 ｜ 52 名可收集角色 + 光暗六神魔 + 赛罗小队</p><nav aria-label="名单章节导航"><a href="#role-tags">定位标签说明</a> · <a href="#roster-counts">阵营及职业统计</a> · <a href="#character-references">逐角出场作品与职业技能参考</a> · <a href="#exp-evolution">哥莫拉与雷德王的EXP进化备注</a></nav></header>
+<main><h2>一、选角原则与基准</h2>
+<ol><li><strong>选角池</strong>：以已上线版本英雄（约 149 名）为基准，从中筛选初版可玩角色；赛罗小队中火焰战士、镜子骑士、钢铁武士三位为项目既有设定，一并纳入。</li><li><strong>主线剧情顺序</strong>：初版内容按「赛罗剧场版 → 串联迪迦 / 泽塔 → 欧布 → 捷德 → 罗布」的版本顺序推进，选角向该顺序的高人气角色倾斜。</li><li><strong>形态取舍</strong>：基础形态优先入选；高级进阶形态优先采用赛罗与迪迦版本内容；版权以新创华授权范围为准——赛文、泰罗等新创华未获版权的角色不纳入（即便其在奥传2已上线）。</li><li><strong>稀有度两档</strong>：全角色仅「稀有 / 超稀有」两档，终身固定。</li><li><strong>阵营归属规则</strong>：严格遵循项目定稿的「阵营世界观映射」（见下），不按印象自造。</li><li><strong>职业覆盖</strong>：四大常规阵营（光之国度 / 群星之光 / 巨兽荒原 / 暗星盟约）各自内部须覆盖六大职业、每种至少 1 名；光暗六神魔（宇宙传说 + 星域霸权）合计覆盖六大职业各 1 名。</li><li><strong>稀有度判定</strong>：有明确后续强化形态的基础形态优先定稀有，包括捷德原始、泽塔原始及本次采用标准形态的杰斯提斯。后续强化形态单独评估；平行属性形态、首次出场形态和多人合体本身不决定稀有度。常态赛罗、高斯月神和迪迦复合型按已确认方案采用超稀有。常规阵营每阵营至少 6 名超稀有的目标继续记录，当前配额见统计。</li></ol>
+<h2>二、阵营世界观映射（项目定稿，归属的唯一依据）</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>阵营</th><th>世界观映射</th><th>克制 / 被克制</th></tr></thead>
+<tbody>
+<tr><td>光之国度</td><td>M78 光之国系（含雷欧 / 阿斯特拉 / 捷德）+ Z95 星云光之国（哉阿斯）+ 光之国引导的战士；另按项目指定纳入杰斯提斯，以及后续 U40 的乔尼亚斯、泰塔斯</td><td>克巨兽荒原 / 被暗星盟约克</td></tr>
+<tr><td>群星之光</td><td>未划入光之国度的其他正义光之战士（平成三杰系、O-50、地球 / 独立宇宙新生代 + 异星正义战士）；杰斯提斯、乔尼亚斯、泰塔斯按项目指定归光之国度</td><td>克暗星盟约 / 被巨兽荒原克</td></tr>
+<tr><td>巨兽荒原</td><td>纯怪兽</td><td>克群星之光 / 被光之国度克</td></tr>
+<tr><td>暗星盟约</td><td>黑暗奥特曼 / 黑暗巨人 + 邪恶宇宙人</td><td>克光之国度 / 被群星之光克</td></tr>
+<tr><td>宇宙传说</td><td>神秘四奥 + 闪耀迪迦 + 新生代究极合体</td><td>与星域霸权互克</td></tr>
+<tr><td>星域霸权</td><td>宇宙霸主级反派</td><td>与宇宙传说互克</td></tr>
+</tbody></table></div>
+<blockquote>关键判定：赛罗小队中只有赛罗是 M78 光之国正统（归光之国度）；火焰战士、镜子骑士、钢铁武士为异星正义战士（非光之国出身），归群星之光；捷德按定稿明确列在光之国度。杰斯提斯及后续的乔尼亚斯、泰塔斯也归光之国度，这是项目阵营归类，不修改角色的原作出身。乔尼亚斯、泰塔斯当前仅确认后续阵营，不加入本版52人名单。</blockquote>
+<hr>
+<h2>三、固定名单（光暗阵营 + 赛罗小队）</h2>
+<h3>3.1 宇宙传说（3 名，全超稀有）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th></tr></thead>
+<tbody>
+<tr><td>诺亚</td><td>超能</td></tr>
+<tr><td>闪耀迪迦</td><td>格斗</td></tr>
+<tr><td>光辉赛罗</td><td>突袭</td></tr>
+</tbody></table></div>
+<h3>3.2 星域霸权（3 名，全超稀有）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th></tr></thead>
+<tbody>
+<tr><td>皇帝贝利亚</td><td>守御</td></tr>
+<tr><td>雷布朗多星人</td><td>支援</td></tr>
+<tr><td>黑暗扎基</td><td>远击</td></tr>
+</tbody></table></div>
+<blockquote>光暗六神魔 · 六职业对应：宇宙传说（超能 / 格斗 / 突袭）与星域霸权（守御 / 支援 / 远击）合计 6 名，恰好一一覆盖六大职业、各 1 名，构成「六神魔 = 六职业」的完整拼图。</blockquote>
+<h3>3.3 赛罗小队（4 名，分属两阵营）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>阵营归属</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>赛罗</td><td>突袭</td><td>光之国度</td><td>队长，机动切入，衔接宇宙拳法、头镖与双射线</td></tr>
+<tr><td>火焰战士</td><td>超能</td><td>群星之光</td><td>红莲火焰，以火焰范围压制为主</td></tr>
+<tr><td>镜子骑士</td><td>支援</td><td>群星之光</td><td>镜面防护与队友保护</td></tr>
+<tr><td>钢铁武士</td><td>守御</td><td>群星之光</td><td>詹伯特，重装护卫与前线接敌</td></tr>
+</tbody></table></div>
+<hr>
+<h2>四、52 人完整大名单</h2>
+<h3>4.1 光之国度（11 名，光之国系及项目指定战士）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>赛罗</td><td>突袭</td><td>超稀有</td><td>物理、能量</td></tr>
+<tr><td>2</td><td>麦克斯</td><td>远击</td><td>超稀有</td><td>物理、能量</td></tr>
+<tr><td>3</td><td>爱迪</td><td>超能</td><td>超稀有</td><td>能量、群攻</td></tr>
+<tr><td>4</td><td>梦比优斯</td><td>格斗</td><td>稀有</td><td>物理、能量</td></tr>
+<tr><td>5</td><td>雷欧</td><td>格斗</td><td>超稀有</td><td>物理、破盾</td></tr>
+<tr><td>6</td><td>阿斯特拉</td><td>格斗</td><td>超稀有</td><td>物理、追击</td></tr>
+<tr><td>7</td><td>希卡利</td><td>支援</td><td>超稀有</td><td>增益、物理、能量</td></tr>
+<tr><td>8</td><td>泽塔</td><td>超能</td><td>稀有</td><td>能量、群攻</td></tr>
+<tr><td>9</td><td>杰斯提斯</td><td>格斗</td><td>稀有</td><td>物理、能量</td></tr>
+<tr><td>10</td><td>利布特</td><td>守御</td><td>稀有</td><td>护盾、物理</td></tr>
+<tr><td>11</td><td>捷德原始</td><td>格斗</td><td>稀有</td><td>物理、能量</td></tr>
+</tbody></table></div>
+<h3>4.2 群星之光（12 名，非光之国的正义光之战士，含赛罗小队异星战士）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>迪迦复合型</td><td>格斗</td><td>超稀有</td><td>物理、能量</td></tr>
+<tr><td>2</td><td>戴拿闪亮</td><td>远击</td><td>超稀有</td><td>能量、群攻</td></tr>
+<tr><td>3</td><td>盖亚 V2</td><td>守御</td><td>超稀有</td><td>物理、控制</td></tr>
+<tr><td>4</td><td>高斯月神</td><td>支援</td><td>超稀有</td><td>控制、增益</td></tr>
+<tr><td>5</td><td>欧布原生</td><td>突袭</td><td>超稀有</td><td>物理、能量</td></tr>
+<tr><td>6</td><td>罗索烈火</td><td>超能</td><td>稀有</td><td>能量、群攻</td></tr>
+<tr><td>7</td><td>布鲁跃水</td><td>远击</td><td>稀有</td><td>能量</td></tr>
+<tr><td>8</td><td>格丽乔</td><td>支援</td><td>超稀有</td><td>治疗、护盾、增益</td></tr>
+<tr><td>9</td><td>特利迦复合</td><td>格斗</td><td>稀有</td><td>能量、群攻</td></tr>
+<tr><td>10</td><td>火焰战士</td><td>超能</td><td>稀有</td><td>能量、群攻</td></tr>
+<tr><td>11</td><td>镜子骑士</td><td>支援</td><td>稀有</td><td>护盾、增益</td></tr>
+<tr><td>12</td><td>钢铁武士</td><td>守御</td><td>稀有</td><td>物理、控制</td></tr>
+</tbody></table></div>
+<h3>4.3 巨兽荒原（11 名，纯怪兽）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>哥莫拉</td><td>格斗</td><td>超稀有</td><td>物理、控制、群攻</td></tr>
+<tr><td>2</td><td>雷德王</td><td>格斗</td><td>超稀有</td><td>物理、破盾</td></tr>
+<tr><td>3</td><td>芝顿</td><td>远击</td><td>超稀有</td><td>能量、护盾</td></tr>
+<tr><td>4</td><td>哥尔赞</td><td>超能</td><td>稀有</td><td>能量、群攻</td></tr>
+<tr><td>5</td><td>美尔巴</td><td>突袭</td><td>稀有</td><td>物理、能量</td></tr>
+<tr><td>6</td><td>巴顿</td><td>突袭</td><td>超稀有</td><td>物理、负面</td></tr>
+<tr><td>7</td><td>金古桥</td><td>守御</td><td>稀有</td><td>物理、能量</td></tr>
+<tr><td>8</td><td>格尔吉欧雷吉纳</td><td>远击</td><td>超稀有</td><td>能量、群攻</td></tr>
+<tr><td>9</td><td>加恩 Q</td><td>支援</td><td>稀有</td><td>护盾、负面</td></tr>
+<tr><td>10</td><td>贝姆斯塔</td><td>守御</td><td>稀有</td><td>护盾、能量</td></tr>
+<tr><td>11</td><td>欧布猛斯王</td><td>守御</td><td>超稀有</td><td>物理、能量、召唤</td></tr>
+</tbody></table></div>
+<blockquote><strong>EXP进化备注</strong>：哥莫拉 → EX哥莫拉；雷德王 → EX雷德王。两者进化后，大招、技能1、技能2全部替换为对应EX形态技能，详见<a href="#exp-evolution">进化规则</a>。</blockquote>
+<h3>4.4 暗星盟约（12 名，黑暗奥特曼 / 黑暗巨人 + 邪恶宇宙人）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>巴尔坦星人</td><td>突袭</td><td>稀有</td><td>召唤、物理</td></tr>
+<tr><td>2</td><td>美弗拉斯星人</td><td>支援</td><td>稀有</td><td>控制、负面</td></tr>
+<tr><td>3</td><td>黑暗梅菲斯特</td><td>超能</td><td>超稀有</td><td>能量、控制</td></tr>
+<tr><td>4</td><td>伽古拉</td><td>格斗</td><td>超稀有</td><td>物理</td></tr>
+<tr><td>5</td><td>那可尔星人</td><td>支援</td><td>稀有</td><td>负面、增益</td></tr>
+<tr><td>6</td><td>巴罗萨星人</td><td>突袭</td><td>超稀有</td><td>物理</td></tr>
+<tr><td>7</td><td>达达</td><td>远击</td><td>稀有</td><td>能量、负面</td></tr>
+<tr><td>8</td><td>巴巴鲁星人</td><td>突袭</td><td>稀有</td><td>物理</td></tr>
+<tr><td>9</td><td>雷弗莱特星人</td><td>守御</td><td>稀有</td><td>护盾、能量</td></tr>
+<tr><td>10</td><td>黑暗特利迦</td><td>格斗</td><td>超稀有</td><td>能量、群攻</td></tr>
+<tr><td>11</td><td>卡露蜜拉</td><td>超能</td><td>超稀有</td><td>控制、负面、群攻、能量</td></tr>
+<tr><td>12</td><td>加拉特隆MK2</td><td>守御</td><td>超稀有</td><td>物理、能量</td></tr>
+</tbody></table></div>
+<h3>4.5 宇宙传说（3 名，全超稀有）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>诺亚</td><td>超能</td><td>超稀有</td><td>能量、群攻</td></tr>
+<tr><td>2</td><td>闪耀迪迦</td><td>格斗</td><td>超稀有</td><td>物理、能量</td></tr>
+<tr><td>3</td><td>光辉赛罗</td><td>突袭</td><td>超稀有</td><td>物理、能量</td></tr>
+</tbody></table></div>
+<h3>4.6 星域霸权（3 名，全超稀有）</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>角色</th><th>职业</th><th>稀有度</th><th>预设标签</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>皇帝贝利亚</td><td>守御</td><td>超稀有</td><td>物理、控制</td></tr>
+<tr><td>2</td><td>雷布朗多星人</td><td>支援</td><td>超稀有</td><td>增益</td></tr>
+<tr><td>3</td><td>黑暗扎基</td><td>远击</td><td>超稀有</td><td>能量、群攻</td></tr>
+</tbody></table></div>
+<hr>
+<a id="role-tags"></a>
+<h3>定位标签说明</h3>
+<p>预设标签用于指导初版技能设计，优先标出角色的主要伤害方式与标志性机制。“物攻”统一写作“物理”，“召唤物”统一写作“召唤”。“群攻”按卡露蜜拉的示例单列为伤害覆盖标签，可与任意机制标签并用。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>类别</th><th>标签</th><th>标注条件</th></tr></thead>
+<tbody>
+<tr><td>伤害类型</td><td>能量、物理、真伤</td><td>按计划采用的伤害类型标注。附带招牌终结技时可同时标注能量和物理；真伤需要技能明确按真实伤害结算</td></tr>
+<tr><td>生存与恢复</td><td>护盾、治疗</td><td>护盾指形成可吸收或拦截伤害的屏障；治疗指回复生命，包括具体技能允许的自疗或友方治疗</td></tr>
+<tr><td>单位与联动</td><td>召唤、追击</td><td>召唤指生成有独立战场行为的单位；追击指由条件或队友行为触发追加进攻</td></tr>
+<tr><td>状态效果</td><td>控制、负面、增益</td><td>控制限制或打断行动；负面标记削弱、持续伤害等效果；增益提供属性、回能或协同收益。复合技能可同时标多个</td></tr>
+<tr><td>针对效果</td><td>破盾、减防</td><td>破盾指对护盾额外消耗或移除；减防指明确降低护甲、魔抗或对应防御属性</td></tr>
+<tr><td>伤害覆盖</td><td>群攻</td><td>常用或标志性伤害技能可同时命中多个敌人</td></tr>
+</tbody></table></div>
+<p>标签是预设。巴尔坦星人的分身按可参与战斗的召唤单位设计，欧布猛斯王的分体按召唤方向预留。雷欧和雷德王预留破盾能力，加恩 Q 和贝姆斯塔的护盾标签指将吸收能力转成护盾机制的设计方向。真伤和减防暂保留在词表，待技能明确后分配给具体角色。</p>
+<a id="roster-counts"></a>
+<h2>五、阵营、职业与稀有度统计</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>阵营</th><th>人数</th><th>超稀有</th><th>稀有</th><th>守御</th><th>格斗</th><th>超能</th><th>支援</th><th>远击</th><th>突袭</th></tr></thead>
+<tbody>
+<tr><td>光之国度</td><td>11</td><td>6</td><td>5</td><td>1</td><td>5</td><td>2</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>群星之光</td><td>12</td><td>6</td><td>6</td><td>2</td><td>2</td><td>2</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>巨兽荒原</td><td>11</td><td>6</td><td>5</td><td>3</td><td>2</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+<tr><td>暗星盟约</td><td>12</td><td>6</td><td>6</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>3</td></tr>
+<tr><td>宇宙传说</td><td>3</td><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>星域霸权</td><td>3</td><td>3</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>合计</td><td>52</td><td>30</td><td>22</td><td>9</td><td>12</td><td>8</td><td>8</td><td>7</td><td>8</td></tr>
+</tbody></table></div>
+<p>全名单共 52 人：30 名超稀有、22 名稀有。常规四阵营各有 6 名超稀有，并各自覆盖六种职业。宇宙传说与星域霸权合计 6 名，六种职业各 1 名。</p>
+<h2>六、本轮调整（2026-11-18，含11月17日已确认调整）</h2>
+<ul><li><strong>艾雷王替换为美尔巴</strong>：巨兽荒原／突袭／稀有，预设标签改为物理、能量；以飞行机动与眼部能量射线作为原作参考，突袭切入为项目技能方向。</li><li><strong>哥莫拉与雷德王的EXP改为进化</strong>：分别变身为EX哥莫拉、EX雷德王，进化后替换大招、技能1、技能2。两者仍为格斗／超稀有，EX形态不另占首发名额；见<a href="#exp-evolution">EXP进化备注</a>。</li><li><strong>利布特</strong>：超稀有降为稀有，仍为光之国度／守御，保留护盾、物理标签。</li><li><strong>泰迦替换为杰斯提斯</strong>：采用标准形态，沿用原席位的格斗／稀有与物理、能量标签，按用户明确指定归入光之国度。阵营是项目分类，原作能力参考仍依据<a href="https://tsuburaya-prod.com/heroes/ultraman-justice">圆谷角色资料</a>。</li><li><strong>后续阵营预设</strong>：U40 的乔尼亚斯、泰塔斯均归入光之国度；本轮只记录阵营，不加入首发人数，也不预设两人的职业和稀有度。</li><li><strong>托雷基亚替换为黑暗梅菲斯特</strong>：采用沟吕木真也对应个体，保留暗星盟约／超能／超稀有与能量、控制标签。超能方向以黑暗领域和黑暗光线为原作参考；具体控制效果由项目技能定义，不沿用托雷基亚的虫洞招式。<a href="https://www.hicbc.com/tv/nexus/secret/b_ultra/">CBC 官方角色与能力资料</a></li><li><strong>最终统计</strong>：光之国度11人、群星之光12人，其他阵营人数不变。全体为30超稀有、22稀有，总人数仍为52。</li><li>出场作品、职业技能参考和统计同步更新。既有角色的其他配置沿用 v1.8；历史技能草案仍需按最新名单另行接入。</li></ul>
+<a id="character-references"></a>
+<h2>七、52 名角色的出场作品与职业技能参考</h2>
+<p>“代表出场”列给出可回看复核的电视作品、话数或电影，覆盖每名角色的本次选定形态。“原作观察点”记录招式、道具、战术或可观察的动作。“本项目技能参考”给出这些表现如何转成当前职业的设计方向。只确认到作品层的条目按作品列出，具体战斗镜头可据此继续定位。</p>
+<h3>7.1 光之国度</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>赛罗</td><td>突袭</td><td>《宇宙英雄之超银河传说》（2009）；《贝利亚银河帝国》（2010）</td><td>快速身法、宇宙拳法、赛罗头镖和双射线</td><td>以快速接近和短时间近身爆发为主，头镖用于衔接，双射线用于终结</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-zero">圆谷资料</a></td></tr>
+<tr><td>麦克斯</td><td>远击</td><td>《麦克斯奥特曼》TV</td><td>麦克修姆之剑、麦克修姆加农、麦克斯银河</td><td>以投掷武器与光线维持远程压制，重型远程招式负责收尾</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-max">圆谷资料</a></td></tr>
+<tr><td>爱迪</td><td>超能</td><td>《爱迪奥特曼》TV</td><td>沙库修姆光线、灵活的光线发射方式</td><td>超能以不同出招方向或范围塑造能量压制</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-80">圆谷资料</a></td></tr>
+<tr><td>梦比优斯</td><td>格斗</td><td>《梦比优斯奥特曼》TV</td><td>基础形态近身对战、梦比姆射线</td><td>格斗以贴身连击为主，光线作为终结</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-mebius">圆谷资料</a></td></tr>
+<tr><td>雷欧</td><td>格斗</td><td>《雷欧奥特曼》TV</td><td>雷欧飞踢</td><td>格斗以拳脚交锋、跃起飞踢破阵为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-leo">圆谷资料</a></td></tr>
+<tr><td>阿斯特拉</td><td>格斗</td><td>《雷欧奥特曼》TV；《奥特银河格斗：大いなる阴谋》</td><td>阿斯特拉劈掌、与雷欧联手施放双重闪光</td><td>以贴身劈掌和协同追击为主，双重闪光作为联动参考</td><td><a href="https://tsuburaya-prod.com/heroes/astra">圆谷资料</a></td></tr>
+<tr><td>希卡利</td><td>支援</td><td>《梦比优斯奥特曼》TV</td><td>骑士光剑、骑士射线、与梦比优斯共同施展合击</td><td>以协同攻击和援护为支援主轴，保留剑与射线。增益效果按项目技能配置</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-hikari">圆谷资料</a></td></tr>
+<tr><td>泽塔</td><td>超能</td><td>《泽塔奥特曼》TV，参考原始形态</td><td>泽斯蒂姆光线</td><td>超能以基础型能量技和方向判定为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-z">圆谷资料</a></td></tr>
+<tr><td>杰斯提斯</td><td>格斗</td><td>《高斯奥特曼2：蓝色行星》（2002）；《高斯奥特曼VS杰斯提斯奥特曼：最终决战》（2003），参考标准形态</td><td>兼具速度和力量的战法、维克特利光线；超能力可作为辅助参考</td><td>格斗以近身压制和反击为主，光线作终结；不混入粉碎形态的专属表现</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-justice">圆谷资料</a></td></tr>
+<tr><td>利布特</td><td>守御</td><td>《奥特银河格斗：新世代英雄》；《特利迦奥特曼》TV</td><td>利布特盾、武术、压缩能量光线</td><td>守御以举盾护卫和接敌后反击为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-ribut">圆谷资料</a></td></tr>
+<tr><td>捷德原始</td><td>格斗</td><td>《捷德奥特曼》第1话及原始形态战斗段落</td><td>原始形态均衡作战、毁灭爆裂</td><td>格斗以贴身连击为主，保留招牌光线终结</td><td><a href="https://tsuburaya-prod.com/news/9">圆谷资料</a></td></tr>
+</tbody></table></div>
+<h3>7.2 群星之光</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>迪迦复合型</td><td>格斗</td><td>《迪迦奥特曼》第1话及复合型常规战斗</td><td>复合型均衡战斗、哉佩利敖光线</td><td>格斗以常态拳脚和近身反击为主，光线作为终结</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-tiga">圆谷资料</a></td></tr>
+<tr><td>戴拿闪亮</td><td>远击</td><td>《戴拿奥特曼》TV；《超时空大决战》</td><td>闪亮型光线应用、索尔捷特光线</td><td>远击以多种远程能量技和直线火力为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-dyna">圆谷资料</a></td></tr>
+<tr><td>盖亚 V2</td><td>守御</td><td>《盖亚奥特曼》第26话之后；《超时空大决战》</td><td>V2 与盖亚剧场版近身迎击欧布猛斯王的交锋</td><td>守御以承接前线压力、近身反推为主，保护队友的效果由项目设计</td><td><a href="https://tsuburaya-prod.com/encyclopedia/king-of-mons">圆谷资料</a></td></tr>
+<tr><td>高斯月神</td><td>支援</td><td>《高斯奥特曼》TV；《高斯奥特曼：第一次接触》</td><td>月神形态化解攻击、满月光波安抚怪兽</td><td>支援以安抚和化解威胁为主，解除状态范围由项目定义</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-cosmos">圆谷资料</a></td></tr>
+<tr><td>欧布原生</td><td>突袭</td><td>《欧布奥特曼》TV，参考恢复原生力量后的战斗</td><td>欧布圣剑、欧布至高圣剑</td><td>突袭以圣剑切入及短时爆发为主，保留光线作终结</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-orb">圆谷资料</a></td></tr>
+<tr><td>罗索烈火</td><td>超能</td><td>《罗布奥特曼》TV，参考烈火形态</td><td>火焰球射击与力量型交锋</td><td>超能以火焰弹及范围火力为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-rosso">圆谷资料</a></td></tr>
+<tr><td>布鲁跃水</td><td>远击</td><td>《罗布奥特曼》TV，参考跃水形态</td><td>水属性射击、速度型战法</td><td>远击以水弹、远程压制与调整射击位置为主</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-blu">圆谷资料</a></td></tr>
+<tr><td>格丽乔</td><td>支援</td><td>《罗布奥特曼剧场版：决定了！羁绊的水晶》；《奥特银河格斗：新世代英雄》</td><td>为队友补充能量、屏障防护</td><td>支援以恢复及保护为主，持续治疗规则由项目定义</td><td><a href="https://tsuburaya-prod.com/heroes/ultrawoman-grigio">圆谷资料</a></td></tr>
+<tr><td>特利迦复合</td><td>格斗</td><td>《特利迦奥特曼》第1话及复合型战斗</td><td>圆环之臂、哉佩利敖光线</td><td>格斗以圆环之臂的剑形态和近身连击为主，哉佩利敖光线用于终结</td><td><a href="https://tsuburaya-prod.com/heroes/ultraman-trigger">圆谷资料</a></td></tr>
+<tr><td>火焰战士</td><td>超能</td><td>《贝利亚银河帝国》</td><td>红莲火焰的火焰能力及与赛罗的近身交锋</td><td>超能主打火焰范围爆发，近身招式用于衔接</td><td><a href="https://tsuburaya-prod.com/news/8013">圆谷资料</a></td></tr>
+<tr><td>镜子骑士</td><td>支援</td><td>《贝利亚银河帝国》；《赛罗奥特曼格斗》第二部</td><td>镜面能力、守护艾斯美拉鲁达</td><td>支援以镜面护盾与掩护为主，队友保护规则属项目设计</td><td><a href="https://tsuburaya-prod.com/news/8013">圆谷资料</a></td></tr>
+<tr><td>钢铁武士</td><td>守御</td><td>《贝利亚银河帝国》；《杀手比特星》</td><td>詹伯特机器人战斗形态与战斧动作</td><td>守御以重装接敌与斧击反制为主，队友护卫规则属项目设计</td><td><a href="https://tamashiiweb.com/item/1624/">万代资料</a></td></tr>
+</tbody></table></div>
+<h3>7.3 巨兽荒原</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>哥莫拉</td><td>格斗</td><td>《奥特曼》第26–27话；《大怪兽格斗》系列</td><td>怪力、长尾、近身猛攻</td><td>格斗以尾扫、撞击和近身推移为主；EXP进化为EX哥莫拉，替换前三技能，见<a href="#exp-evolution">进化备注</a></td><td><a href="https://tsuburaya-prod.com/encyclopedia/gomora">圆谷资料</a></td></tr>
+<tr><td>雷德王</td><td>格斗</td><td>《奥特曼》第8话</td><td>怪力、投掷岩石</td><td>格斗以重击及近身压制为主，投石负责衔接；EXP进化为EX雷德王，替换前三技能，见<a href="#exp-evolution">进化备注</a></td><td><a href="https://tsuburaya-prod.com/encyclopedia/red-king">圆谷资料</a></td></tr>
+<tr><td>芝顿</td><td>远击</td><td>《奥特曼》第39话</td><td>一兆度火球、手部波状光线、瞬移和屏障</td><td>远击以火球和波状光线为主，瞬移用来调整射位，屏障用于自保</td><td><a href="https://tsuburaya-prod.com/encyclopedia/zetton-2">圆谷资料</a></td></tr>
+<tr><td>哥尔赞</td><td>超能</td><td>《迪迦奥特曼》第1话</td><td>额部超音波光线、与美尔巴共同袭击金字塔</td><td>超能以额部射线和区域压制为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/golza">圆谷资料</a></td></tr>
+<tr><td>美尔巴</td><td>突袭</td><td>《迪迦奥特曼》第1话</td><td>高速飞行、眼部能量射线</td><td>突袭以飞行切入、俯冲物理攻击及射线衔接为设计方向；物理、能量为项目预设标签</td><td><a href="https://tsuburaya-prod.com/encyclopedia/melba">圆谷资料</a></td></tr>
+<tr><td>巴顿</td><td>突袭</td><td>《泰罗奥特曼》第17–19话</td><td>飞行、利喙和毒攻</td><td>突袭以飞行扑入、啄击及毒伤为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/birdon">圆谷资料</a></td></tr>
+<tr><td>金古桥</td><td>守御</td><td>《赛文奥特曼》第14–15话</td><td>重装机械躯体、分离合体</td><td>守御以机械躯体承压和反击为主，分离仅作招式表现参考</td><td><a href="https://tsuburaya-prod.com/encyclopedia/king-joe">圆谷资料</a></td></tr>
+<tr><td>格尔吉欧雷吉纳</td><td>远击</td><td>《罗布奥特曼》第23–25话</td><td>进化后的火焰能量与重装火力，参考美剑沙姬迎战鲁格赛特的段落</td><td>以蓄力远程轰击和区域压制为设计方向</td><td><a href="https://www.m-78.jp/rb/kaiju.html">圆谷怪兽图鉴</a> · <a href="https://www.m-78.jp/rb/story.html">官方分集剧情</a></td></tr>
+<tr><td>加恩 Q</td><td>支援</td><td>《盖亚奥特曼》第6话</td><td>眼部能量技、吸收与怪异空间表现</td><td>支援以吸收和干扰为主，屏护队友属于项目设计</td><td><a href="https://tsuburaya-prod.com/encyclopedia/gan-q">圆谷资料</a></td></tr>
+<tr><td>贝姆斯塔</td><td>守御</td><td>《归来的奥特曼》第18话</td><td>腹部吸收器官、吸收能量</td><td>守御以吸收能量攻击后的承压与反击为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/bemstar">圆谷资料</a></td></tr>
+<tr><td>欧布猛斯王</td><td>守御</td><td>《迪迦·戴拿·盖亚奥特曼：超时空大决战》（1999）</td><td>重型合体兽压制盖亚 V2，口部射线，分出斯休拉和巴吉利斯</td><td>守御以重躯挡线和正面压制为主，前方射线用于反制，分体可作为专属机制候选</td><td><a href="https://tsuburaya-prod.com/encyclopedia/king-of-mons">圆谷资料</a></td></tr>
+</tbody></table></div>
+<h3>7.4 暗星盟约</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>巴尔坦星人</td><td>突袭</td><td>《奥特曼》第2话，初代个体</td><td>分身、瞬间移动、钳形手武装</td><td>突袭以分身佯攻和瞬移切入为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/baltan">圆谷资料</a></td></tr>
+<tr><td>美弗拉斯星人</td><td>支援</td><td>《奥特曼》第33话</td><td>反重力光线、超能力和谋略</td><td>支援以干扰与创造集火窗口为主，队友增益属于项目设计</td><td><a href="https://tsuburaya-prod.com/encyclopedia/alien-mefilas">圆谷资料</a></td></tr>
+<tr><td>黑暗梅菲斯特</td><td>超能</td><td>《奈克瑟斯奥特曼》第14话及沟吕木真也对应的战斗段落</td><td>黑暗领域、黑暗光线“Dark Ray Schtrom”；梅菲斯特爪近身攻击</td><td>超能以领域压制和黑暗光线为主，爪击用于近身衔接；控制规则为项目设计</td><td><a href="https://hicbc.com/tv/nexus/next/014/">CBC 第14话</a> · <a href="https://www.hicbc.com/tv/nexus/secret/b_ultra/">CBC 能力资料</a> · <a href="https://toy.bandai.co.jp/ja/series/ultraman/item/01_21269/">万代梅菲斯特爪资料</a></td></tr>
+<tr><td>伽古拉</td><td>格斗</td><td>《欧布奥特曼》TV</td><td>蛇心剑及其剑术</td><td>格斗以近身剑招和反击为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/jugglus-juggler">圆谷资料</a></td></tr>
+<tr><td>那可尔星人</td><td>支援</td><td>《归来的奥特曼》第37–38话</td><td>制订伏击计划、指挥布莱克王协作</td><td>支援以目标标记及指令协同为主，具体增减益属项目设计</td><td><a href="https://tsuburaya-prod.com/encyclopedia/alien-nackle">圆谷资料</a></td></tr>
+<tr><td>巴罗萨星人</td><td>突袭</td><td>《泽塔奥特曼》第9–10话，参考初代个体</td><td>掠夺武器、多种兵器作战</td><td>突袭以换兵器逼近及短时间爆发为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/alien-barossa">圆谷资料</a></td></tr>
+<tr><td>达达</td><td>远击</td><td>《奥特曼》第28话，参考初代个体</td><td>缩小光线枪、变换面孔</td><td>远击以枪械锁定和射线压制为主，缩小的战斗效果属项目设计</td><td><a href="https://tsuburaya-prod.com/encyclopedia/dada">圆谷资料</a></td></tr>
+<tr><td>巴巴鲁星人</td><td>突袭</td><td>《雷欧奥特曼》第38–39话</td><td>拟态成阿斯特拉、借伪装制造混乱</td><td>突袭以伪装接近和暴露后爆发为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/alien-babarue">圆谷资料</a></td></tr>
+<tr><td>雷弗莱特星人</td><td>守御</td><td>《梦比优斯奥特曼》第34话</td><td>硬壳防护、反射光线</td><td>守御以抗光线和反射反制为主</td><td><a href="https://hicbc.com/tv/mebius/monster/rival/033.php">CBC 节目图鉴</a></td></tr>
+<tr><td>黑暗特利迦</td><td>格斗</td><td>《特利迦奥特曼》TV，参考古代黑暗巨人及复现段落</td><td>黑暗巨人形态与黑暗能量</td><td>格斗以近身连击和正面压制为主，黑暗能量用于近身群攻与终结；伊格尼斯变身版本的专属表现另行区分</td><td><a href="https://tsuburaya-prod.com/encyclopedia/trigger-dark">圆谷资料</a></td></tr>
+<tr><td>卡露蜜拉</td><td>超能</td><td>《特利迦奥特曼》TV</td><td>光鞭和黑暗术式</td><td>超能以中距离鞭击压制和打断为主</td><td><a href="https://tsuburaya-prod.com/encyclopedia/carmeara">圆谷资料</a></td></tr>
+<tr><td>加拉特隆MK2</td><td>守御</td><td>《捷德奥特曼剧场版：连接吧！愿望！！》；《泰迦奥特曼》TV</td><td>武装强化躯体、加拉特隆战斧、内置光线兵器</td><td>守御以重装接敌和战斧反制为主</td><td><a href="https://toy.bandai.co.jp/ja/series/ultraman/sofubi/?wovn=en">万代资料</a></td></tr>
+</tbody></table></div>
+<h3>7.5 宇宙传说</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>诺亚</td><td>超能</td><td>《奈克瑟斯奥特曼》第37话</td><td>闪电·诺亚、诺亚地狱火</td><td>超能以能量爆发和近身高热冲击为主</td><td><a href="https://tamashiiweb.com/item/15889/">万代资料</a></td></tr>
+<tr><td>闪耀迪迦</td><td>格斗</td><td>《迪迦奥特曼》第52话，与加坦杰厄的终战</td><td>汇聚光之力后复苏及终战攻击</td><td>格斗沿用本项目职业分配，以近身反击接光线终结为参考</td><td><a href="https://www.m-78.jp/ultraman-bd/ultraman-tiga/story/">圆谷资料</a></td></tr>
+<tr><td>光辉赛罗</td><td>突袭</td><td>《赛罗奥特曼格斗》第二部末段</td><td>脱离贝利亚控制后的光辉变身及时间奇迹</td><td>突袭以快速切入和短时爆发体现，时间回溯若制作需另定规则</td><td><a href="https://tsuburaya-prod.com/news/2125">圆谷资料</a></td></tr>
+</tbody></table></div>
+<h3>7.6 星域霸权</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>角色</th><th>职业</th><th>代表出场作品或话数</th><th>原作观察点</th><th>本项目技能参考</th><th>来源</th></tr></thead>
+<tbody>
+<tr><td>皇帝贝利亚</td><td>守御</td><td>《贝利亚银河帝国》（2010），参考凯撒贝利亚阶段</td><td>皇帝形态与赛罗对峙、正面交战</td><td>守御以正面压场和近身反击为主，区分电弧贝利亚形态</td><td><a href="https://tsuburaya-prod.com/encyclopedia/kaiser-belial">圆谷资料</a></td></tr>
+<tr><td>雷布朗多星人</td><td>支援</td><td>《超级银河大怪兽格斗 NEVER ENDING ODYSSEY》</td><td>雷奥尼克斯与操控怪兽的设定</td><td>支援以指挥、强化特定伙伴为主，伙伴范围及能力由项目配置</td><td><a href="https://www.bandai.co.jp/catalog/item.php?jan_cd=4543112594273000">万代资料</a></td></tr>
+<tr><td>黑暗扎基</td><td>远击</td><td>《奈克瑟斯奥特曼》第37话</td><td>与奈克瑟斯、诺亚交锋，黑暗能量射击</td><td>远击以蓄力直线光线为核心，近战作为自保</td><td><a href="https://tsuburaya-prod.com/encyclopedia/dark-zagi">圆谷资料</a></td></tr>
+</tbody></table></div>
+<h3>7.7 光之国度职业复核</h3>
+<p>职业依据本项目希望玩家在战斗中反复使用的招式和承担的职责。常态赛罗侧重机动切入，阿斯特拉侧重近身对打与协同追击。雷欧主打飞踢和重击，梦比优斯主打近身连招接光线终结，杰斯提斯以兼具速度和力量的近身压制为主，捷德原始侧重均衡近战接毁灭爆裂。爱迪和泽塔原始主要分配能量技。麦克斯负责维持远程输出，利布特负责举盾承压，希卡利以合击为依据承担协同支援。职业及具体触发规则为项目设计，原作参考见上表。</p>
+<h3>7.8 新增替换角色的采用范围</h3>
+<p>杰斯提斯采用标准形态，保留后续粉碎形态的差异空间；本轮按原席位采用格斗／稀有，按指定归光之国度。光之国度格斗5人、群星之光格斗2人。黑暗梅菲斯特采用沟吕木真也个体，不与红眼的黑暗梅菲斯特二代混用；超能／超稀有沿用原席位，以黑暗领域作为区别于其他能量输出角色的方向。</p>
+<p>后续的乔尼亚斯、泰塔斯统一按光之国度规划。本轮未加入首发52人，后续入选时再确认形态、职业、稀有度与定位标签。</p>
+<a id="exp-evolution"></a>
+<h3>7.9 哥莫拉与雷德王：EXP进化备注</h3>
+<p>两名角色的EXP主动技能采用变身进化，<strong>进化后的前三个技能明确指“大招、技能1、技能2”</strong>，全部切换为对应EX形态的技能版本。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>首发角色</th><th>EXP主动效果</th><th>进化后大招</th><th>进化后技能1</th><th>进化后技能2</th></tr></thead>
+<tbody>
+<tr><td>哥莫拉（格斗／超稀有）</td><td>变身为EX哥莫拉</td><td>替换为EX哥莫拉大招</td><td>替换为EX哥莫拉技能1</td><td>替换为EX哥莫拉技能2</td></tr>
+<tr><td>雷德王（格斗／超稀有）</td><td>变身为EX雷德王</td><td>替换为EX雷德王大招</td><td>替换为EX雷德王技能1</td><td>替换为EX雷德王技能2</td></tr>
+</tbody></table></div>
+<ul><li>EX形态属于同一角色的战斗内进化，不新增可收集角色，也不改变当前阵营、职业、稀有度和首发人数。</li><li>这是已确认的项目技能方向；基础形态优先入选的规则不排除这两名角色的战斗内进化。前三技能的替换不包含普攻，普攻及其他条目是否变化本轮未定。</li><li>EXP沿用整体框架的传说+解锁、蓝瓜子升级及每名角色每局最多释放1次的规则；具体EX技能效果、变身持续与退回条件、切换时的冷却及能量处理留待技能案确定。</li></ul>
+<h2>八、资源核对</h2>
+<ul><li>钢铁武士按詹伯特、火焰战士按红莲火焰处理。出场作品按附件中的 52 人及列出的赛罗小队成员整理。</li><li>加拉特隆MK2按强化型号引用资料。绑定工程资源前需核对资源名为“加拉特隆”的资产是否对应 MK2。</li><li>黑暗特利迦的原作存在古代个体与伊格尼斯变身的表现差异，最终技能清单应随选定个体确认。</li></ul>
+<ul><li>本轮替换角色需核对各自模型、形态与资源编号；不能复用泰迦、托雷基亚、艾雷王的资源编号或技能配置。</li><li>哥莫拉、雷德王均需准备基础形态与对应EX形态的模型、动画及特效，并为进化后的大招、技能1、技能2配置独立技能表现；仍各计1名可收集角色。</li></ul></main>
+<footer>名单 v1.9 ｜ 与战斗系统框架图解同源整合 ｜ 待评审</footer>
+</div>
+
+<div class="panel" id="panel-combat">
+<header><div class="eyebrow">ULTRAMAN PROJECT / COMBAT FRAMEWORK</div><h1>战斗系统框架 · 图解版</h1>
+<p>5 人小队 × 六边格 × 1 普攻 + 6 技能 × 个人与小队双能量</p>
+<div class="key"><span>蓝 / 灰：基础运行</span><span>金：EXP 与关键决策</span><span>紫 / 绿：永久成长与配装</span></div>
+<p>2026-11-17 · V1.1 ｜ 已定需求落实；沿用建议与原型默认可调整。</p>
+<p class="screen-only"><button type="button" onclick="window.print()">打印图解</button>　窄屏可横向查看图形。</p><nav aria-label="章节导航">
+<a href="#overview">00 一图看懂战斗框架</a>
+<a href="#team">01 小队与六边格战场</a>
+<a href="#modes">02 战斗流程</a>
+<a href="#hero">03 技能树与解锁升级</a>
+<a href="#exp">04 个人大招、共享 EXP 与变身器</a>
+<a href="#equipment">05 可选择的成长方向与强化关系</a>
+<a href="#runtime">06 局内动作与技能执行</a>
+<a href="#authority">07 权威结果与本地还原</a>
+<a href="#qa">08 关键规则与验收索引</a>
+</nav></header><main>
+<section id="overview"><h2>00 一图看懂战斗框架</h2><p class="lead">先看系统关系，再看战斗流程、技能解锁和玩家能作出的选择。</p>
+<figure class="figure" aria-label="01  战斗系统总览"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="850" viewBox="0 0 1240 850" role="img" aria-labelledby="title-0 desc-0">
+<title id="title-0">01  战斗系统总览</title><desc id="desc-0">永久养成形成角色能力；战前配置组合队伍；局内自动执行。</desc>
+<defs><marker id="arrow-0" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="850" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">01  战斗系统总览</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">永久养成形成角色能力；战前配置组合队伍；局内自动执行。</text>
+<g data-card="角色永久养成" data-x="32" data-y="135" data-w="350" data-h="146">
+<rect x="32" y="135" width="350" height="146" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="50" y="169" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">角色永久养成</text>
+<text x="50" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">品阶 → 解锁机制与属性成长</text>
+<text x="50" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP、专武、觉醒 → 技能成长</text>
+<text x="50" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">角色回响 → 定向强化</text>
+</g>
+<g data-card="等级与职业装备" data-x="445" data-y="135" data-w="350" data-h="146">
+<rect x="445" y="135" width="350" height="146" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="463" y="169" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">等级与职业装备</text>
+<text x="463" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">共鸣等级 → 基础属性与等级技能</text>
+<text x="463" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">六职业各一套装备</text>
+<text x="463" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">常驻 / 赛季项按玩法生效</text>
+</g>
+<g data-card="小队变身器" data-x="858" data-y="135" data-w="350" data-h="146">
+<rect x="858" y="135" width="350" height="146" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="169" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">小队变身器</text>
+<text x="876" y="201" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">每队装配 1 件（原型默认）</text>
+<text x="876" y="228" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">队伍 BUFF、触发技或机制</text>
+<text x="876" y="255" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">拥有及养成永久保留</text>
+</g>
+<path d="M207 281 L207 321 L620 321" class="connector"/>
+<path d="M620 281 L620 321 L620 321" class="connector"/>
+<path d="M1033 281 L1033 321 L620 321" class="connector"/>
+<path d="M620 321 L620 353" class="connector" marker-end="url(#arrow-0)"/>
+<g data-card="战前配置 · 5 人小队" data-x="270" data-y="353" data-w="700" data-h="132">
+<rect x="270" y="353" width="700" height="132" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="288" y="387" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">战前配置 · 5 人小队</text>
+<text x="288" y="419" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">上阵英雄与格位 ｜ 角色回响 ｜ 小队变身器</text>
+<text x="288" y="446" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP 释放顺位 ｜ 个人大招联动策略</text>
+</g>
+<path d="M620 485 L620 530" class="connector" marker-end="url(#arrow-0)"/>
+<g data-card="六边格自动战斗" data-x="70" data-y="530" data-w="1100" data-h="132">
+<rect x="70" y="530" width="1100" height="132" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="88" y="564" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">六边格自动战斗</text>
+<text x="88" y="596" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">个人能量 → 个人大招 ｜ 共享能量 → EXP ｜ 变身器 → 独立触发</text>
+<text x="88" y="623" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">统一处理：状态 / AI / 技能 / 位移 / 命中 / 伤害 / 派生效果</text>
+</g>
+<path d="M620 662 L620 704 L329 704 L329 735" class="connector" marker-end="url(#arrow-0)"/>
+<path d="M620 704 L919 704 L919 735" class="connector" marker-end="url(#arrow-0)"/>
+<g data-card="普通挂机 / 部分剧情" data-x="70" data-y="735" data-w="520" data-h="83">
+<rect x="70" y="735" width="520" height="83" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="88" y="769" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">普通挂机 / 部分剧情</text>
+<text x="88" y="801" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">可手动选择个人大招与 EXP</text>
+</g>
+<g data-card="PVP / 排行榜 PVE" data-x="650" data-y="735" data-w="520" data-h="83">
+<rect x="650" y="735" width="520" height="83" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="668" y="769" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">PVP / 排行榜 PVE</text>
+<text x="668" y="801" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">全自动 · 服务器定结果 · 客户端还原</text>
+</g>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/01_总框架.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+</section>
+<section id="team" class="compact"><h2>01 小队与六边格战场</h2><p class="lead">默认 5 人小队；六职业为守御、格斗、突袭、远击、超能、支援。</p>
+<div class="table-wrap"><table><tr><th>设计项</th><th>规则</th></tr><tr><td>六边格</td><td>前后同列连接，左右相邻列交错半格；内部格最多连接六个邻格</td></tr><tr><td>战前摆放</td><td>只能放在配置好的己方上阵格；每格 1 名上阵英雄，可交换位置</td></tr><tr><td>战场划分</td><td>有效战斗格、双方上阵格、障碍格分别定义；召唤和特殊位移另有落点规则</td></tr><tr><td>战前保存</td><td>英雄与格位、角色回响、变身器、EXP 顺位、个人大招联动开关与顺位</td></tr><tr><td>职业作用</td><td>确定定位与职业装备，不强制规定所有技能的射程或伤害类型</td></tr><tr><td>多队玩法</td><td>各队独立保存阵容、变身器、共享 EXP 与释放记录</td></tr></table></div>
+</section>
+<section id="modes"><h2>02 战斗流程</h2><p class="lead">普通挂机和部分剧情可操作大招；PVP 与排行榜 PVE 全程自动。</p>
+<figure class="figure" aria-label="02  从布阵到结算"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="925" viewBox="0 0 1240 925" role="img" aria-labelledby="title-1 desc-1">
+<title id="title-1">02  从布阵到结算</title><desc id="desc-1">战前策略对两类模式都有效；局中手动权限按模式区分。</desc>
+<defs><marker id="arrow-1" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="925" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">02  从布阵到结算</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">战前策略对两类模式都有效；局中手动权限按模式区分。</text>
+<g data-card="① 选择玩法" data-x="32" data-y="130" data-w="265" data-h="112">
+<rect x="32" y="130" width="265" height="112" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="22" fill="#526677" font-weight="700" text-anchor="start">① 选择玩法</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">读取地图、胜负与操作权限</text>
+</g>
+<g data-card="② 配置阵容" data-x="350" data-y="130" data-w="390" data-h="112">
+<rect x="350" y="130" width="390" height="112" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="368" y="164" font-size="22" fill="#8c5b0c" font-weight="700" text-anchor="start">② 配置阵容</text>
+<text x="368" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">5 人、合法格位、回响与变身器</text>
+<text x="368" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">保存 EXP 顺位、大招联动</text>
+</g>
+<g data-card="③ 生成参战快照" data-x="793" data-y="130" data-w="415" data-h="112">
+<rect x="793" y="130" width="415" height="112" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="811" y="164" font-size="22" fill="#285b9e" font-weight="700" text-anchor="start">③ 生成参战快照</text>
+<text x="811" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查资格与模式规则</text>
+<text x="811" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">固定英雄、成长、地图与策略</text>
+</g>
+<path d="M297 186 L350 186" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M740 186 L793 186" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M1000 242 L1000 273 L322 273 L322 281" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M1000 273 L918 273 L918 281" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M322 318 L322 333" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M918 318 L918 333" class="connector" marker-end="url(#arrow-1)"/>
+<text x="322" y="307" font-size="20" fill="#167b65" font-weight="700" text-anchor="middle">允许手动的挂机 / 剧情</text>
+<text x="918" y="307" font-size="20" fill="#7654a2" font-weight="700" text-anchor="middle">PVP / 排行榜 PVE</text>
+<g data-card="④ 初始化战场" data-x="52" data-y="333" data-w="540" data-h="112">
+<rect x="52" y="333" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="367" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">④ 初始化战场</text>
+<text x="70" y="399" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">摆放单位、应用开场效果</text>
+<text x="70" y="426" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">初始化个人能量、共享 EXP 与当局次数</text>
+</g>
+<g data-card="④ 服务器初始化并演算" data-x="648" data-y="333" data-w="540" data-h="112">
+<rect x="648" y="333" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="367" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">④ 服务器初始化并演算</text>
+<text x="666" y="399" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">使用同一份快照、规则与随机序列</text>
+<text x="666" y="426" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">全程自动，按战前配置调度技能</text>
+</g>
+<path d="M322 445 L322 478" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M918 445 L918 478" class="connector" marker-end="url(#arrow-1)"/>
+<g data-card="⑤ 按逻辑拍推进" data-x="52" data-y="478" data-w="540" data-h="112">
+<rect x="52" y="478" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="512" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑤ 按逻辑拍推进</text>
+<text x="70" y="544" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普通行为自动；允许玩家提交大招 / EXP</text>
+<text x="70" y="571" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">状态与命中结算后检查结束条件</text>
+</g>
+<g data-card="⑤ 服务器确认结果" data-x="648" data-y="478" data-w="540" data-h="112">
+<rect x="648" y="478" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="512" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">⑤ 服务器确认结果</text>
+<text x="666" y="544" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">达到结束条件 → 保存结果与战斗记录</text>
+<text x="666" y="571" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按战斗 ID 结算奖励、积分与排名</text>
+</g>
+<path d="M322 590 L322 623" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M918 590 L918 623" class="connector" marker-end="url(#arrow-1)"/>
+<g data-card="⑥ 结束与结算" data-x="52" data-y="623" data-w="540" data-h="112">
+<rect x="52" y="623" width="540" height="112" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="657" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑥ 结束与结算</text>
+<text x="70" y="689" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">胜负、时限、平局由玩法规则判定</text>
+<text x="70" y="716" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">在线奖励由服务端确认</text>
+</g>
+<g data-card="⑥ 客户端还原战斗" data-x="648" data-y="623" data-w="540" data-h="112">
+<rect x="648" y="623" width="540" height="112" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="666" y="657" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">⑥ 客户端还原战斗</text>
+<text x="666" y="689" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">输入快照 + 种子，或兼容事件记录</text>
+<text x="666" y="716" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">播放过程和战报，结果以服务端为准</text>
+</g>
+<path d="M322 735 L322 772 L620 772 L620 807" class="connector" marker-end="url(#arrow-1)"/>
+<path d="M918 735 L918 772 L620 772" class="connector"/>
+<g data-card="⑦ 查看战报 → 调整阵容 → 再挑战" data-x="340" data-y="807" data-w="560" data-h="80">
+<rect x="340" y="807" width="560" height="80" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="358" y="841" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">⑦ 查看战报 → 调整阵容 → 再挑战</text>
+</g>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/02_战斗流程.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<details><summary>展开规则表与边界说明</summary><p><strong>胜负由玩法规定</strong>：歼灭、时限、剧情目标与平局规则分别配置；双方同拍满足条件时使用统一优先规则。结算后再调整阵容，不在服务器回放期间改写战斗输入。</p></details>
+</section>
+<section id="hero"><h2>03 技能树与解锁升级</h2><p class="lead">角色共 7 个条目：1 个普攻 + 6 个技能；树状图表示能力归属，不是互斥选点。</p>
+<figure class="figure" aria-label="03  角色技能树 · 1 普攻 + 6 技能"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1010" viewBox="0 0 1240 1010" role="img" aria-labelledby="title-2 desc-2">
+<title id="title-2">03  角色技能树 · 1 普攻 + 6 技能</title><desc id="desc-2">树枝表示能力归属，均可随养成解锁；不是互斥天赋树。</desc>
+<defs><marker id="arrow-2" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="1010" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">03  角色技能树 · 1 普攻 + 6 技能</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">树枝表示能力归属，均可随养成解锁；不是互斥天赋树。</text>
+<g data-card="角色技能" data-x="32" data-y="460" data-w="178" data-h="116">
+<rect x="32" y="460" width="178" height="116" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="494" font-size="24" fill="#526677" font-weight="700" text-anchor="start">角色技能</text>
+<text x="50" y="526" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">1 个普攻</text>
+<text x="50" y="553" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">6 个技能条目</text>
+</g>
+<path d="M210 518 L240 518" class="connector"/>
+<path d="M240 175 L240 859" class="connector"/>
+<path d="M240 175 L275 175" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="普攻" data-x="275" data-y="129" data-w="260" data-h="92">
+<rect x="275" y="129" width="260" height="92" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="293" y="163" font-size="25" fill="#526677" font-weight="700" text-anchor="start">普攻</text>
+<text x="293" y="195" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">基础攻击</text>
+</g>
+<path d="M535 175 L575 175" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="初始可用" data-x="575" data-y="129" data-w="633" data-h="92">
+<rect x="575" y="129" width="633" height="92" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="593" y="163" font-size="21" fill="#526677" font-weight="700" text-anchor="start">初始可用</text>
+<text x="593" y="195" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">属性成长影响基础效果；回响等可定向强化。</text>
+</g>
+<path d="M240 289 L275 289" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="个人大招" data-x="275" data-y="243" data-w="260" data-h="92">
+<rect x="275" y="243" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="277" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">个人大招</text>
+<text x="293" y="309" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 289 L575 289" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="Lv.1 开启；等级提升技能档位*" data-x="575" data-y="243" data-w="633" data-h="92">
+<rect x="575" y="243" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="277" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.1 开启；等级提升技能档位*</text>
+<text x="593" y="309" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">消耗本人能量；觉醒通常强化此技能。</text>
+</g>
+<path d="M240 403 L275 403" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="技能 1" data-x="275" data-y="357" data-w="260" data-h="92">
+<rect x="275" y="357" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="391" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">技能 1</text>
+<text x="293" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 403 L575 403" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="Lv.11 开启；等级提升技能档位*" data-x="575" data-y="357" data-w="633" data-h="92">
+<rect x="575" y="357" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="391" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.11 开启；等级提升技能档位*</text>
+<text x="593" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">可为自动主动、被动或条件触发技能。</text>
+</g>
+<path d="M240 517 L275 517" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="技能 2" data-x="275" data-y="471" data-w="260" data-h="92">
+<rect x="275" y="471" width="260" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="293" y="505" font-size="25" fill="#285b9e" font-weight="700" text-anchor="start">技能 2</text>
+<text x="293" y="537" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 517 L575 517" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="Lv.31 开启；等级提升技能档位*" data-x="575" data-y="471" data-w="633" data-h="92">
+<rect x="575" y="471" width="633" height="92" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="593" y="505" font-size="21" fill="#285b9e" font-weight="700" text-anchor="start">Lv.31 开启；等级提升技能档位*</text>
+<text x="593" y="537" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与技能 1 共存，按角色定位设计。</text>
+</g>
+<path d="M240 631 L275 631" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="EXP 技能" data-x="275" data-y="585" data-w="260" data-h="92">
+<rect x="275" y="585" width="260" height="92" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="293" y="619" font-size="25" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 技能</text>
+<text x="293" y="651" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 631 L575 631" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="传说+解锁；蓝瓜子升级" data-x="575" data-y="585" data-w="633" data-h="92">
+<rect x="575" y="585" width="633" height="92" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="593" y="619" font-size="21" fill="#8c5b0c" font-weight="700" text-anchor="start">传说+解锁；蓝瓜子升级</text>
+<text x="593" y="651" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">同一条目包含 EXP 主动 + 专精被动。</text>
+</g>
+<path d="M240 745 L275 745" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="专武技能" data-x="275" data-y="699" data-w="260" data-h="92">
+<rect x="275" y="699" width="260" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="293" y="733" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">专武技能</text>
+<text x="293" y="765" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 745 L575 745" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="神话+开启专武；强化分档生效*" data-x="575" data-y="699" data-w="633" data-h="92">
+<rect x="575" y="699" width="633" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="593" y="733" font-size="21" fill="#7654a2" font-weight="700" text-anchor="start">神话+开启专武；强化分档生效*</text>
+<text x="593" y="765" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通常强化已有招式；可按角色追加机制。</text>
+</g>
+<path d="M240 859 L275 859" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="觉醒技能" data-x="275" data-y="813" data-w="260" data-h="92">
+<rect x="275" y="813" width="260" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="293" y="847" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">觉醒技能</text>
+<text x="293" y="879" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">独立技能条目</text>
+</g>
+<path d="M535 859 L575 859" class="connector" marker-end="url(#arrow-2)"/>
+<g data-card="巅峰+解锁" data-x="575" data-y="813" data-w="633" data-h="92">
+<rect x="575" y="813" width="633" height="92" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="593" y="847" font-size="21" fill="#7654a2" font-weight="700" text-anchor="start">巅峰+解锁</text>
+<text x="593" y="879" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通常强化个人大招；不新增一条能量。</text>
+</g>
+<rect x="32" y="944" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="974" font-size="18" fill="#526677" font-weight="400" text-anchor="start">* 等级门槛与专武节点是沿用《启程》的本项目建议基准；EXP 和觉醒门槛按已定需求。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/03_技能树.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<figure class="figure" aria-label="04  解锁与升级路线"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="990" viewBox="0 0 1240 990" role="img" aria-labelledby="title-3 desc-3">
+<title id="title-3">04  解锁与升级路线</title><desc id="desc-3">等级、品阶和材料投入共同作用于技能；节点间距不代表培养时间。</desc>
+<defs><marker id="arrow-3" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="990" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">04  解锁与升级路线</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">等级、品阶和材料投入共同作用于技能；节点间距不代表培养时间。</text>
+<text x="32" y="139" font-size="22" fill="#285b9e" font-weight="700" text-anchor="start">A · 等级轴（沿用建议）</text>
+<text x="45" y="195" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">个人大招</text>
+<path d="M235 188 L1075 188" class="connector"/>
+<circle cx="235" cy="188" r="10" fill="#285b9e"/>
+<text x="235" y="167" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.1</text>
+<text x="235" y="221" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">解锁 · 技能 1 级</text>
+<circle cx="445" cy="188" r="10" fill="#285b9e"/>
+<text x="445" y="167" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.51</text>
+<text x="445" y="221" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 2 级</text>
+<circle cx="655" cy="188" r="10" fill="#285b9e"/>
+<text x="655" y="167" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.111</text>
+<text x="655" y="221" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 3 级</text>
+<circle cx="865" cy="188" r="10" fill="#285b9e"/>
+<text x="865" y="167" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.171</text>
+<text x="865" y="221" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 4 级</text>
+<circle cx="1075" cy="188" r="10" fill="#285b9e"/>
+<text x="1075" y="167" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.231</text>
+<text x="1075" y="221" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 5 级</text>
+<text x="45" y="294" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">技能 1</text>
+<path d="M235 287 L865 287" class="connector"/>
+<circle cx="235" cy="287" r="10" fill="#285b9e"/>
+<text x="235" y="266" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.11</text>
+<text x="235" y="320" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">解锁 · 技能 1 级</text>
+<circle cx="445" cy="287" r="10" fill="#285b9e"/>
+<text x="445" y="266" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.71</text>
+<text x="445" y="320" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 2 级</text>
+<circle cx="655" cy="287" r="10" fill="#285b9e"/>
+<text x="655" y="266" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.131</text>
+<text x="655" y="320" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 3 级</text>
+<circle cx="865" cy="287" r="10" fill="#285b9e"/>
+<text x="865" y="266" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.191</text>
+<text x="865" y="320" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 4 级</text>
+<text x="45" y="393" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">技能 2</text>
+<path d="M235 386 L865 386" class="connector"/>
+<circle cx="235" cy="386" r="10" fill="#285b9e"/>
+<text x="235" y="365" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.31</text>
+<text x="235" y="419" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">解锁 · 技能 1 级</text>
+<circle cx="445" cy="386" r="10" fill="#285b9e"/>
+<text x="445" y="365" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.91</text>
+<text x="445" y="419" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 2 级</text>
+<circle cx="655" cy="386" r="10" fill="#285b9e"/>
+<text x="655" y="365" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.151</text>
+<text x="655" y="419" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 3 级</text>
+<circle cx="865" cy="386" r="10" fill="#285b9e"/>
+<text x="865" y="365" font-size="19" fill="#162b3b" font-weight="600" text-anchor="middle">英雄 Lv.211</text>
+<text x="865" y="419" font-size="17" fill="#526677" font-weight="400" text-anchor="middle">升至技能 4 级</text>
+<text x="32" y="467" font-size="22" fill="#7654a2" font-weight="700" text-anchor="start">B · 品阶轴（关键机制节点）</text>
+<g data-card="已获得角色" data-x="32" data-y="490" data-w="250" data-h="127">
+<rect x="32" y="490" width="250" height="127" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="524" font-size="25" fill="#526677" font-weight="700" text-anchor="start">已获得角色</text>
+<text x="50" y="556" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普攻与个人大招</text>
+<text x="50" y="583" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">等级继续开放技能</text>
+</g>
+<g data-card="传说+" data-x="338" data-y="490" data-w="250" data-h="127">
+<rect x="338" y="490" width="250" height="127" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="356" y="524" font-size="25" fill="#8c5b0c" font-weight="700" text-anchor="start">传说+</text>
+<text x="356" y="556" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">解锁 EXP 主动 + 专精</text>
+<text x="356" y="583" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">开启角色回响获取资格</text>
+</g>
+<g data-card="神话+*" data-x="644" data-y="490" data-w="250" data-h="127">
+<rect x="644" y="490" width="250" height="127" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="662" y="524" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">神话+*</text>
+<text x="662" y="556" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">激活专武</text>
+<text x="662" y="583" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">开放专武技能成长</text>
+</g>
+<g data-card="巅峰+" data-x="950" data-y="490" data-w="258" data-h="127">
+<rect x="950" y="490" width="258" height="127" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="968" y="524" font-size="25" fill="#7654a2" font-weight="700" text-anchor="start">巅峰+</text>
+<text x="968" y="556" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">解锁觉醒技能</text>
+<text x="968" y="583" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">继续衔接冠阶养成</text>
+</g>
+<path d="M282 553 L338 553" class="connector" marker-end="url(#arrow-3)"/>
+<path d="M588 553 L644 553" class="connector" marker-end="url(#arrow-3)"/>
+<path d="M894 553 L950 553" class="connector" marker-end="url(#arrow-3)"/>
+<text x="32" y="678" font-size="22" fill="#167b65" font-weight="700" text-anchor="start">C · 材料轴（玩家决定投入优先级）</text>
+<g data-card="蓝瓜子 → EXP 等级" data-x="32" data-y="704" data-w="350" data-h="146">
+<rect x="32" y="704" width="350" height="146" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="738" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">蓝瓜子 → EXP 等级</text>
+<text x="50" y="770" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP 主动效果提升</text>
+<text x="50" y="797" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">专精被动按对应档位成长</text>
+<text x="50" y="824" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不增加每人每局 1 次的默认上限</text>
+</g>
+<g data-card="专武材料 → 专武档位*" data-x="445" data-y="704" data-w="350" data-h="146">
+<rect x="445" y="704" width="350" height="146" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="463" y="738" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">专武材料 → 专武档位*</text>
+<text x="463" y="770" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">+0 → +5 → +10 → +15</text>
+<text x="463" y="797" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">分档解锁强化；+15 还要求巅峰</text>
+<text x="463" y="824" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不等同于每升 1 级就增加技能</text>
+</g>
+<g data-card="回响材料 → 装配回响" data-x="858" data-y="704" data-w="350" data-h="146">
+<rect x="858" y="704" width="350" height="146" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="738" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">回响材料 → 装配回响</text>
+<text x="876" y="770" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">培养已获得的角色回响</text>
+<text x="876" y="797" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">提升指定技能或普攻</text>
+<text x="876" y="824" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">同一角色按持有选项更换方向</text>
+</g>
+<rect x="32" y="888" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="918" font-size="18" fill="#526677" font-weight="400" text-anchor="start">品阶图仅列关键节点，中间品阶仍保留；起始稀有度不等于当前养成品阶。</text>
+<rect x="32" y="941" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="971" font-size="18" fill="#526677" font-weight="400" text-anchor="start">* 神话+专武及 +0 / +5 / +10 / +15 为沿用建议；EXP 总级数、消耗与回响档位另定。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/04_解锁升级.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<details><summary>展开规则表与边界说明</summary><div class="table-wrap"><table><tr><th>状态</th><th>已确定 / 建议基准</th></tr><tr><td>已确定</td><td>传说+解锁 EXP，并开启角色专属回响获取资格；巅峰+解锁觉醒</td></tr><tr><td>已确定</td><td>EXP 使用蓝瓜子升级；原专精并入 EXP 条目，不额外占第 7 个技能槽</td></tr><tr><td>沿用建议</td><td>大招在英雄 1 / 51 / 111 / 171 / 231 级成长；技能 1 在 11 / 71 / 131 / 191 级成长；技能 2 在 31 / 91 / 151 / 211 级成长</td></tr><tr><td>沿用建议</td><td>神话+开放专武；技能节点为专武 +0 / +5 / +10 / +15，+15 还要求巅峰</td></tr><tr><td>待数值案确定</td><td>EXP 总等级、每档强化与消耗；回响强化档位、消耗和实际产出</td></tr></table></div>
+<p>EXP 专精被动在解锁并上阵后按自身条件生效，不需要先在当局释放 EXP 主动。觉醒与专武通常强化现有技能，不必额外制作一个主动按钮。</p>
+<p><strong>品阶主线</strong>：稀有 → 稀有+ → 精英 → 精英+ → 史诗 → 史诗+ → 传说 → <strong>传说+</strong> → 神话 → <strong>神话+</strong> → 巅峰 → <strong>巅峰+</strong> → 冠阶。角色从自身初始品阶进入相应节点；关键节点图不删除中间品阶。</p></details>
+</section>
+<section id="exp"><h2>04 个人大招、共享 EXP 与变身器</h2><p class="lead">三种通道各自判断条件，不能混用能量或消耗次数。</p>
+<figure class="figure" aria-label="05  三条触发通道 · EXP 的一次完整循环"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="985" viewBox="0 0 1240 985" role="img" aria-labelledby="title-4 desc-4">
+<title id="title-4">05  三条触发通道 · EXP 的一次完整循环</title><desc id="desc-4">个人大招、共享 EXP、变身器分别判断资源与条件。</desc>
+<defs><marker id="arrow-4" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="985" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">05  三条触发通道 · EXP 的一次完整循环</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">个人大招、共享 EXP、变身器分别判断资源与条件。</text>
+<g data-card="个人大招 · 各自充能" data-x="32" data-y="130" data-w="350" data-h="142">
+<rect x="32" y="130" width="350" height="142" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">个人大招 · 各自充能</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">本人的能量满且可施法</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">点英雄头像 → 选目标</text>
+<text x="50" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">自动：单放或按联动队列</text>
+</g>
+<g data-card="小队 EXP · 全队充能" data-x="445" data-y="130" data-w="350" data-h="142">
+<rect x="445" y="130" width="350" height="142" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="463" y="164" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">小队 EXP · 全队充能</text>
+<text x="463" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">共享满条；本局尚有可释放者</text>
+<text x="463" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">点 EXP → 选英雄 → 选目标</text>
+<text x="463" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">自动：按默认或保存顺位</text>
+</g>
+<g data-card="变身器 · 独立触发" data-x="858" data-y="130" data-w="350" data-h="142">
+<rect x="858" y="130" width="350" height="142" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="164" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">变身器 · 独立触发</text>
+<text x="876" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">开场、定时或满足事件条件</text>
+<text x="876" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按设备自己的冷却或充能</text>
+<text x="876" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不占用共享 EXP 能量</text>
+</g>
+<text x="32" y="320" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">共享 EXP 流程（原型默认：满条施放 1 人，然后重新充能）</text>
+<g data-card="① 队员贡献有效事件" data-x="32" data-y="350" data-w="300" data-h="122">
+<rect x="32" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">① 队员贡献有效事件</text>
+<text x="50" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按配置累计到共享条</text>
+<text x="50" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">多段与召唤贡献有独立限制</text>
+</g>
+<g data-card="② 满条 → 保持就绪" data-x="470" data-y="350" data-w="300" data-h="122">
+<rect x="470" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="488" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">② 满条 → 保持就绪</text>
+<text x="488" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">满条后停止累积</text>
+<text x="488" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查未使用且已解锁的英雄</text>
+</g>
+<g data-card="③ 选择释放者与目标" data-x="908" data-y="350" data-w="300" data-h="122">
+<rect x="908" y="350" width="300" height="122" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="926" y="384" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">③ 选择释放者与目标</text>
+<text x="926" y="416" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">手动三步 / 自动按顺位</text>
+<text x="926" y="443" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">受控、死亡、目标条件需复核</text>
+</g>
+<path d="M332 411 L470 411" class="connector" marker-end="url(#arrow-4)"/>
+<path d="M770 411 L908 411" class="connector" marker-end="url(#arrow-4)"/>
+<path d="M1058 472 L1058 516 L620 516 L620 552" class="connector" marker-end="url(#arrow-4)"/>
+<g data-card="④ 到达施放提交点" data-x="350" data-y="552" data-w="540" data-h="116">
+<rect x="350" y="552" width="540" height="116" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="368" y="586" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">④ 到达施放提交点</text>
+<text x="368" y="618" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">复核通过 → 清空共享条 + 记录该英雄已用</text>
+<text x="368" y="645" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">提交前取消或失效：不消耗、不占次数</text>
+</g>
+<path d="M620 668 L620 704 L322 704 L322 740" class="connector" marker-end="url(#arrow-4)"/>
+<path d="M620 704 L918 704 L918 740" class="connector" marker-end="url(#arrow-4)"/>
+<g data-card="还有未使用 EXP 的上阵英雄" data-x="52" data-y="740" data-w="540" data-h="111">
+<rect x="52" y="740" width="540" height="111" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="70" y="774" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">还有未使用 EXP 的上阵英雄</text>
+<text x="70" y="806" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">继续充能 → 下一轮按规则选择</text>
+<text x="70" y="833" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡后复活不清除“本局已用”记录</text>
+</g>
+<g data-card="全部已使用 / 本局无解锁者" data-x="648" data-y="740" data-w="540" data-h="111">
+<rect x="648" y="740" width="540" height="111" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="666" y="774" font-size="23" fill="#526677" font-weight="700" text-anchor="start">全部已使用 / 本局无解锁者</text>
+<text x="666" y="806" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">停止充能，按钮显示不可用原因</text>
+<text x="666" y="833" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普通技能、个人大招照常执行</text>
+</g>
+<path d="M52 796 L18 796 L18 411 L32 411" class="connector" marker-end="url(#arrow-4)" stroke-dasharray="6 5"/>
+<rect x="32" y="889" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="919" font-size="18" fill="#526677" font-weight="400" text-anchor="start">自动暂不可用：有限等待后检查下一位；若仍无合法释放者则保留满条。</text>
+<rect x="32" y="938" width="1176" height="47" rx="8" fill="#fff4d9"/>
+<text x="48" y="968" font-size="18" fill="#8c5b0c" font-weight="400" text-anchor="start">单次战斗内每名角色最多释放 1 次 EXP；转波、死亡、复活不会重置次数。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/05_能量与EXP.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<details><summary>展开规则表与边界说明</summary><div class="table-wrap"><table><tr><th>边界情况</th><th>原型处理</th></tr><tr><td>手动 EXP</td><td>点击满条 EXP → 选英雄 → 选目标；自施法或全体技在第 3 步确认</td></tr><tr><td>自动 EXP</td><td>默认按上阵槽号顺序，与战场格位无关；死亡、未解锁、已使用的角色跳过</td></tr><tr><td>优先位暂时受控或无目标</td><td>有限等待后检查下一位；仍无合法方案时保留满条</td></tr><tr><td>提交前取消或条件失效</td><td>不消耗能量，不占用当局次数</td></tr><tr><td>提交后被打断</td><td>默认不退能量与次数；已生成的独立射弹等按生命周期继续</td></tr><tr><td>本局全员用完</td><td>停止充能；每人每局 1 次，不因复活重置；新战斗才初始化</td></tr><tr><td>与个人大招联动冲突</td><td>默认先完成已启动联动或不可打断动作，EXP 保持满条等待</td></tr></table></div>
+<p><strong>单场边界</strong>：同一战斗内的波次切换继承 EXP 已用记录；若玩法由多场独立战斗组成，各场重新初始化。复活者若之前未用 EXP，恢复合法状态后仍可按顺位施放。</p>
+<p>个人大招联动继续使用各英雄自己的能量：全员同时满足释放条件后才启动，按顺位逐人提交和扣费；不与 EXP 满条绑定。<span class="doc-ref" title="本地文档（线上不可用）">查看联动策略细则</span>。</p></details>
+</section>
+<section id="equipment"><h2>05 可选择的成长方向与强化关系</h2><p class="lead">固定解锁负责纵向成长；投入先后、回响装配和队伍配置负责差异化。</p>
+<figure class="figure" aria-label="06  玩家如何选择成长方向"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="966" viewBox="0 0 1240 966" role="img" aria-labelledby="title-5 desc-5">
+<title id="title-5">06  玩家如何选择成长方向</title><desc id="desc-5">固定机制逐步解锁；资源优先级与装配组合构成培养差异。</desc>
+<defs><marker id="arrow-5" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="966" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">06  玩家如何选择成长方向</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">固定机制逐步解锁；资源优先级与装配组合构成培养差异。</text>
+<g data-card="固定定位" data-x="32" data-y="130" data-w="350" data-h="151">
+<rect x="32" y="130" width="350" height="151" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#526677" font-weight="700" text-anchor="start">固定定位</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">职业、阵营、角色原生技能</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">品阶门槛与技能解锁节点</text>
+<text x="50" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">升级不会自由转职</text>
+</g>
+<g data-card="可选择的投入" data-x="445" data-y="130" data-w="350" data-h="151">
+<rect x="445" y="130" width="350" height="151" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="463" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">可选择的投入</text>
+<text x="463" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">先培养哪位英雄</text>
+<text x="463" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">先升 EXP、专武还是回响</text>
+<text x="463" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">职业装备的材料分配</text>
+</g>
+<g data-card="可选择的配置" data-x="858" data-y="130" data-w="350" data-h="151">
+<rect x="858" y="130" width="350" height="151" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="164" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">可选择的配置</text>
+<text x="876" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">已获得且适配的角色回响</text>
+<text x="876" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">小队变身器与队友组合</text>
+<text x="876" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">站位、EXP 顺位、大招联动</text>
+</g>
+<text x="32" y="328" font-size="22" fill="#162b3b" font-weight="700" text-anchor="start">方向模板 · 仅供符合角色原有能力的英雄选择</text>
+<g data-card="普攻持续输出" data-x="32" data-y="356" data-w="350" data-h="143">
+<rect x="32" y="356" width="350" height="143" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="390" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">普攻持续输出</text>
+<text x="50" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普攻型回响 + 对应专武效果</text>
+<text x="50" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化稳定输出与普攻附带机制</text>
+</g>
+<g data-card="技能爆发" data-x="445" data-y="356" data-w="350" data-h="143">
+<rect x="445" y="356" width="350" height="143" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="463" y="390" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">技能爆发</text>
+<text x="463" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">大招 / 普通技能型回响</text>
+<text x="463" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">配合专武、觉醒与联动窗口</text>
+</g>
+<g data-card="EXP 关键爆发" data-x="858" data-y="356" data-w="350" data-h="143">
+<rect x="858" y="356" width="350" height="143" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="876" y="390" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 关键爆发</text>
+<text x="876" y="422" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">优先投入 EXP 等级</text>
+<text x="876" y="449" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通过顺位决定出手窗口</text>
+</g>
+<g data-card="控制与负面辅助" data-x="32" data-y="536" data-w="350" data-h="143">
+<rect x="32" y="536" width="350" height="143" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="50" y="570" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">控制与负面辅助</text>
+<text x="50" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有控制、减防等效果</text>
+<text x="50" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">联动先手，为后续输出创造条件</text>
+</g>
+<g data-card="承伤与保护" data-x="445" data-y="536" data-w="350" data-h="143">
+<rect x="445" y="536" width="350" height="143" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="463" y="570" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">承伤与保护</text>
+<text x="463" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有护盾、减伤或保护</text>
+<text x="463" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">生存投入 + 站位 + 队伍设备</text>
+</g>
+<g data-card="治疗与增益" data-x="858" data-y="536" data-w="350" data-h="143">
+<rect x="858" y="536" width="350" height="143" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="876" y="570" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">治疗与增益</text>
+<text x="876" y="602" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已有治疗或增益技能</text>
+<text x="876" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与队友、变身器形成支持组合</text>
+</g>
+<path d="M620 281 L620 315" class="connector"/>
+<g data-card="形成“角色培养方案”，而非新增一套天赋系统" data-x="32" data-y="746" data-w="1176" data-h="107">
+<rect x="32" y="746" width="1176" height="107" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="780" font-size="25" fill="#8c5b0c" font-weight="700" text-anchor="start">形成“角色培养方案”，而非新增一套天赋系统</text>
+<text x="50" y="812" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">同一角色的分化来自：投入先后 + 持有回响选择 + 队伍策略；多个成长系统可以同时提升。</text>
+</g>
+<rect x="32" y="899" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="929" font-size="18" fill="#526677" font-weight="400" text-anchor="start">英雄能走哪些方向，由其实际技能与回响选项决定；不会让所有职业都获得治疗、控制或突袭。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/06_成长方向.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<figure class="figure" aria-label="07  成长模块如何汇入最终技能"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="900" viewBox="0 0 1240 900" role="img" aria-labelledby="title-6 desc-6">
+<title id="title-6">07  成长模块如何汇入最终技能</title><desc id="desc-6">角色回响是个人饰品；变身器是队伍法术，两者归属与作用范围不同。</desc>
+<defs><marker id="arrow-6" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="900" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">07  成长模块如何汇入最终技能</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">角色回响是个人饰品；变身器是队伍法术，两者归属与作用范围不同。</text>
+<g data-card="等级 + 品阶 + 职业装备" data-x="32" data-y="130" data-w="340" data-h="139">
+<rect x="32" y="130" width="340" height="139" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">等级 + 品阶 + 职业装备</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">形成角色有效属性</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">等级开放基础技能档位</text>
+<text x="50" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">模式规则决定哪些成长生效</text>
+</g>
+<g data-card="角色原生技能" data-x="450" data-y="130" data-w="340" data-h="139">
+<rect x="450" y="130" width="340" height="139" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="468" y="164" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">角色原生技能</text>
+<text x="468" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">普攻 / 大招 / 技能 1 / 技能 2</text>
+<text x="468" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">EXP 主动 + 专精被动</text>
+<text x="468" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">先确定各条目的解锁与等级</text>
+</g>
+<g data-card="小队变身器" data-x="868" data-y="130" data-w="340" data-h="139">
+<rect x="868" y="130" width="340" height="139" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="886" y="164" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">小队变身器</text>
+<text x="886" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">全队 BUFF 或独立触发机制</text>
+<text x="886" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">受益对象由装配效果决定</text>
+<text x="886" y="250" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">永久养成；独立于角色回响</text>
+</g>
+<g data-card="专武技能" data-x="32" data-y="330" data-w="340" data-h="139">
+<rect x="32" y="330" width="340" height="139" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="50" y="364" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">专武技能</text>
+<text x="50" y="396" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">在指定强化档位生效</text>
+<text x="50" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">强化已存在的技能或被动</text>
+<text x="50" y="450" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">也可按角色追加专属机制</text>
+</g>
+<g data-card="觉醒技能" data-x="450" data-y="330" data-w="340" data-h="139">
+<rect x="450" y="330" width="340" height="139" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="468" y="364" font-size="23" fill="#7654a2" font-weight="700" text-anchor="start">觉醒技能</text>
+<text x="468" y="396" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">巅峰+开放</text>
+<text x="468" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">通常强化个人大招</text>
+<text x="468" y="450" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">特殊角色可明确其他作用对象</text>
+</g>
+<g data-card="角色回响" data-x="868" data-y="330" data-w="340" data-h="139">
+<rect x="868" y="330" width="340" height="139" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="886" y="364" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">角色回响</text>
+<text x="886" y="396" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">传说+开启获取资格</text>
+<text x="886" y="423" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">装配已获得的专属回响</text>
+<text x="886" y="450" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">定向强化指定技能或普攻</text>
+</g>
+<path d="M202 469 L202 514 L620 514" class="connector"/>
+<path d="M620 469 L620 514 L620 514" class="connector"/>
+<path d="M1038 469 L1038 514 L620 514" class="connector"/>
+<path d="M620 514 L620 563" class="connector" marker-end="url(#arrow-6)"/>
+<path d="M202 269 L202 299 L14 299 L14 632 L270 632" class="connector" marker-end="url(#arrow-6)"/>
+<path d="M620 269 L620 302 L415 302 L415 514" class="connector"/>
+<path d="M1038 269 L1038 299 L1226 299 L1226 632 L970 632" class="connector" marker-end="url(#arrow-6)"/>
+<g data-card="生成本场有效技能与属性" data-x="270" data-y="563" data-w="700" data-h="139">
+<rect x="270" y="563" width="700" height="139" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="288" y="597" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">生成本场有效技能与属性</text>
+<text x="288" y="629" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">数值叠加 ｜ 追加效果 ｜ 互斥替换按规则取舍</text>
+<text x="288" y="656" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">再接受战斗中的 BUFF、状态与目标条件</text>
+<text x="288" y="683" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">服务器演算与客户端还原读取相同结果</text>
+</g>
+<path d="M620 702 L620 748" class="connector" marker-end="url(#arrow-6)"/>
+<g data-card="进入命中、伤害、控制、治疗、护盾等结算" data-x="270" data-y="748" data-w="700" data-h="87">
+<rect x="270" y="748" width="700" height="87" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="288" y="782" font-size="24" fill="#8c5b0c" font-weight="700" text-anchor="start">进入命中、伤害、控制、治疗、护盾等结算</text>
+</g>
+<rect x="32" y="850" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="880" font-size="18" fill="#526677" font-weight="400" text-anchor="start">专武 / 觉醒 / 回响强化同一招式时，应声明叠加或替换关系，避免重复施加。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/07_强化关系.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<details><summary>展开规则表与边界说明</summary><div class="table-wrap"><table><tr><th>系统</th><th>玩家可以选择</th><th>作用边界</th></tr><tr><td>共鸣与职业装备</td><td>培养节奏、职业装备投入优先级</td><td>共鸣主线继续由原成长体系推动；不靠新回响或变身器解锁等级</td></tr><tr><td>英雄品阶</td><td>优先升阶哪名英雄</td><td>技能门槛固定，不能花其他系统材料绕开</td></tr><tr><td>EXP 成长</td><td>优先升级哪名英雄、如何安排释放顺位</td><td>升级影响 EXP 和专精的配置效果；默认不提高单人当局次数</td></tr><tr><td>专武</td><td>投入哪位英雄及推进到哪个强化节点</td><td>固定强化该英雄指定技能，不是任意替换技能</td></tr><tr><td>角色回响</td><td>在已获得且适配该英雄的回响中选装和升级</td><td>默认一人一件；只有提供多个选项的英雄才能切换强化方向</td></tr><tr><td>小队变身器</td><td>选择全队 BUFF 或机制方案，并投入成长</td><td>默认一队一件，永久拥有并保留养成；与 EXP 能量独立</td></tr><tr><td>战前策略</td><td>站位、队友、EXP 顺位、大招联动</td><td>改变执行时机与配合，不改变英雄职业和解锁门槛</td></tr></table></div>
+<p><strong>成长不是六选一</strong>：普攻、爆发、控制、保护等是培养取向示例，不新增通用天赋点；专武、EXP、觉醒、回响可以共同生效。某位英雄是否有两条以上路线，取决于其实际技能和可用回响设计。</p>
+<p><strong>赛季保留</strong>：英雄品阶、已获得的永久技能成长、专武、角色回响（原型默认）、变身器拥有和养成保留。赛季等级、赛季装备及规则按模式处理，不重置永久变身器。</p></details>
+</section>
+<section id="runtime"><h2>06 局内动作与技能执行</h2><p class="lead">统一逻辑推进动作与结算，表现层还原同一套结果。</p>
+<figure class="figure" aria-label="08  局内运行循环与行动选择"><svg xmlns="http://www.w3.org/2000/svg" width="1240" height="978" viewBox="0 0 1240 978" role="img" aria-labelledby="title-7 desc-7">
+<title id="title-7">08  局内运行循环与行动选择</title><desc id="desc-7">这是本项目的调度设计；同一逻辑拍内按稳定顺序执行，动画只负责表现。</desc>
+<defs><marker id="arrow-7" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8" fill="#8294a1"/></marker></defs>
+<style>text{font-family:"Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif} .connector{fill:none;stroke:#8294a1;stroke-width:2;stroke-linejoin:round} </style>
+<rect width="1240" height="978" fill="#ffffff"/>
+<rect x="32" y="32" width="5" height="34" rx="2" fill="#167b65"/>
+<text x="50" y="58" font-size="29" fill="#162b3b" font-weight="700" text-anchor="start">08  局内运行循环与行动选择</text>
+<text x="50" y="91" font-size="17" fill="#526677" font-weight="400" text-anchor="start">这是本项目的调度设计；同一逻辑拍内按稳定顺序执行，动画只负责表现。</text>
+<g data-card="① 推进逻辑时钟与已存在效果" data-x="32" data-y="130" data-w="540" data-h="106">
+<rect x="32" y="130" width="540" height="106" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="164" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">① 推进逻辑时钟与已存在效果</text>
+<text x="50" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">持续状态、位移、射弹、技能阶段到期事件</text>
+<text x="50" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按固定顺序处理，更新可行动状态</text>
+</g>
+<g data-card="② 生成有效施法请求" data-x="668" data-y="130" data-w="540" data-h="106">
+<rect x="668" y="130" width="540" height="106" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="686" y="164" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">② 生成有效施法请求</text>
+<text x="686" y="196" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">玩家请求 / 个人大招与联动 / 共享 EXP</text>
+<text x="686" y="223" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">暂不扣资源，先检查状态与执行窗口</text>
+</g>
+<path d="M572 183 L668 183" class="connector" marker-end="url(#arrow-7)"/>
+<path d="M938 236 L938 287" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="③ 选择本拍动作" data-x="668" data-y="287" data-w="540" data-h="107">
+<rect x="668" y="287" width="540" height="107" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="686" y="321" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">③ 选择本拍动作</text>
+<text x="686" y="353" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">已经提交的技能遵守中断与继续规则</text>
+<text x="686" y="380" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">空闲或可接管时，按优先级接受合法请求</text>
+</g>
+<g data-card="④ 执行并结算效果" data-x="32" data-y="287" data-w="540" data-h="107">
+<rect x="32" y="287" width="540" height="107" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="50" y="321" font-size="23" fill="#285b9e" font-weight="700" text-anchor="start">④ 执行并结算效果</text>
+<text x="50" y="353" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">提交时扣资源；在逻辑命中点处理结算</text>
+<text x="50" y="380" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡、控制和派生效果进入统一事件顺序</text>
+</g>
+<path d="M668 341 L572 341" class="connector" marker-end="url(#arrow-7)"/>
+<path d="M302 394 L302 443" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="⑤ 检查胜负与本拍完成" data-x="32" data-y="443" data-w="540" data-h="107">
+<rect x="32" y="443" width="540" height="107" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="50" y="477" font-size="23" fill="#167b65" font-weight="700" text-anchor="start">⑤ 检查胜负与本拍完成</text>
+<text x="50" y="509" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">结束条件满足 → 固定最终结果</text>
+<text x="50" y="536" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">否则进入下一拍；渲染按逻辑状态插值</text>
+</g>
+<path d="M32 495 L18 495 L18 183 L32 183" class="connector" marker-end="url(#arrow-7)" stroke-dasharray="6 5"/>
+<g data-card="表现层" data-x="668" data-y="443" data-w="540" data-h="107">
+<rect x="668" y="443" width="540" height="107" rx="12" fill="#f0f3f5" stroke="#526677" stroke-opacity="0.24"/>
+<text x="686" y="477" font-size="23" fill="#526677" font-weight="700" text-anchor="start">表现层</text>
+<text x="686" y="509" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">动画、特效、镜头、血条与音效</text>
+<text x="686" y="536" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">不使用动画片段长度改写命中或胜负</text>
+</g>
+<path d="M572 495 L668 495" class="connector" marker-end="url(#arrow-7)" stroke-dasharray="6 5"/>
+<text x="32" y="610" font-size="23" fill="#162b3b" font-weight="700" text-anchor="start">单位行动选择 · 默认优先顺序</text>
+<g data-card="1  强制行为" data-x="32" data-y="640" data-w="216" data-h="126">
+<rect x="32" y="640" width="216" height="126" rx="12" fill="#fff0e9" stroke="#aa5335" stroke-opacity="0.24"/>
+<text x="50" y="674" font-size="18" fill="#aa5335" font-weight="700" text-anchor="start">1  强制行为</text>
+<text x="50" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">死亡、硬控、强制位移</text>
+</g>
+<path d="M248 703 L272 703" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="2  已提交技能" data-x="272" data-y="640" data-w="216" data-h="126">
+<rect x="272" y="640" width="216" height="126" rx="12" fill="#f0ebfc" stroke="#7654a2" stroke-opacity="0.24"/>
+<text x="290" y="674" font-size="18" fill="#7654a2" font-weight="700" text-anchor="start">2  已提交技能</text>
+<text x="290" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按当前阶段继续或中断</text>
+</g>
+<path d="M488 703 L512 703" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="3  合法大招 / EXP" data-x="512" data-y="640" data-w="216" data-h="126">
+<rect x="512" y="640" width="216" height="126" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="530" y="674" font-size="18" fill="#8c5b0c" font-weight="700" text-anchor="start">3  合法大招 / EXP</text>
+<text x="530" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">按联动与请求</text>
+<text x="530" y="733" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">优先级调度</text>
+</g>
+<path d="M728 703 L752 703" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="4  基础技能" data-x="752" data-y="640" data-w="216" data-h="126">
+<rect x="752" y="640" width="216" height="126" rx="12" fill="#eaf2ff" stroke="#285b9e" stroke-opacity="0.24"/>
+<text x="770" y="674" font-size="18" fill="#285b9e" font-weight="700" text-anchor="start">4  基础技能</text>
+<text x="770" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">条件满足则发起</text>
+</g>
+<path d="M968 703 L992 703" class="connector" marker-end="url(#arrow-7)"/>
+<g data-card="5  普攻 / 寻路 / 待机" data-x="992" data-y="640" data-w="216" data-h="126">
+<rect x="992" y="640" width="216" height="126" rx="12" fill="#e6f6f0" stroke="#167b65" stroke-opacity="0.24"/>
+<text x="1010" y="674" font-size="18" fill="#167b65" font-weight="700" text-anchor="start">5  普攻 / 寻路 / 待机</text>
+<text x="1010" y="706" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">检查目标、距离</text>
+<text x="1010" y="733" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">与位置可达性</text>
+</g>
+<g data-card="EXP 与个人大招冲突时" data-x="32" data-y="803" data-w="1176" data-h="90">
+<rect x="32" y="803" width="1176" height="90" rx="12" fill="#fff4d9" stroke="#8c5b0c" stroke-opacity="0.24"/>
+<text x="50" y="837" font-size="23" fill="#8c5b0c" font-weight="700" text-anchor="start">EXP 与个人大招冲突时</text>
+<text x="50" y="869" font-size="18" fill="#162b3b" font-weight="400" text-anchor="start">原型默认：已启动联动或不可打断动作先执行；EXP 保持满条，等待合法窗口。</text>
+</g>
+<rect x="32" y="921" width="1176" height="47" rx="8" fill="#f0f3f5"/>
+<text x="48" y="951" font-size="18" fill="#526677" font-weight="400" text-anchor="start">每拍都复核存活、控制、费用与目标；进入队列不代表获得霸体、无敌或必中。</text>
+</svg></figure><p class="figlink"><a href="BattleFrameworkVisuals/08_局内循环.svg" target="_blank">单独打开此图 / 放大查看 ↗</a></p>
+<details><summary>展开规则表与边界说明</summary><div class="table-wrap"><table><tr><th>核心环节</th><th>约束</th></tr><tr><td>时间</td><td>固定逻辑步长推进；动画按帧插值。时缓、冻结与倍速对哪些逻辑生效由规则显式定义</td></tr><tr><td>行动</td><td>当前技能的接管、中断和继续由阶段权限决定，不因新按钮亮起就无条件覆盖</td></tr><tr><td>范围</td><td>指定单位、格子范围、几何范围、射弹分别判断；同格多个单位可分别入选</td></tr><tr><td>位移</td><td>普通寻路与技能位移分开处理；聚怪、冲锋、传送及拦截使用对应落点规则</td></tr><tr><td>伤害</td><td>命中及免疫 → 对应伤害公式 → 护盾 / 生命变化 → 控制、受击与派生事件</td></tr><tr><td>派生</td><td>追击、召唤及追加效果携带来源，限制重复触发；独立射弹有自己的生命周期</td></tr></table></div>
+<p><span class="doc-ref" title="本地文档（线上不可用）">追击与拦截设计</span> · <span class="doc-ref" title="本地文档（线上不可用）">拦截细则</span></p></details>
+</section>
+<section id="authority" class="compact"><h2>07 权威结果与本地还原</h2><p class="lead">PVP 与排行榜 PVE 的客户端播放不会反过来决定比赛结果。</p>
+<div class="table-wrap"><table><tr><th>服务器提供</th><th>客户端需要处理</th></tr><tr><td>战斗 ID、模式、规则版本</td><td>确认当前记录与回放兼容</td></tr><tr><td>地图、双方阵容与属性、技能及策略快照</td><td>重建开场状态</td></tr><tr><td>随机种子与必要校验信息，或事件记录</td><td>同规则重演，或按记录还原过程</td></tr><tr><td>最终结果、战报统计、结算数据</td><td>展示服务器记录；不以表现层重新判胜</td></tr></table></div>
+<p>原型默认使用“同版本快照 + 种子”重演；不兼容或校验失败时改用兼容事件播放，或直接显示战报。断线按战斗 ID 查询，重复查看不重复发奖。</p>
+</section>
+<section id="qa" class="compact"><h2>08 关键规则与验收索引</h2><p class="lead">图中已区分已定需求、沿用建议与原型默认；以下用于开发和测试逐项核对。</p>
+<div class="table-wrap"><table><tr><th>检查点</th><th>必须满足</th></tr><tr><td>布阵</td><td>5 人限制、合法格位、交换、保存与多队隔离正确</td></tr><tr><td>技能树</td><td>1 普攻 + 6 技能；EXP 包含专精；传说+与巅峰+节点正确</td></tr><tr><td>成长</td><td>等级、品阶、材料三条轴不混淆；已投入强化能正确汇入目标技能</td></tr><tr><td>EXP</td><td>三步操作、自动顺位、每人每局一次、提交前后消耗规则正确</td></tr><tr><td>选择</td><td>战前合法不代表提交时合法；死亡、控制、无目标都需复核</td></tr><tr><td>联动</td><td>仅个人大招参与；全员就绪后按队列执行，不自动赋予霸体或必中</td></tr><tr><td>永久性</td><td>赛季切换保留永久线，特别是小队变身器；模式快照正确重建</td></tr><tr><td>还原</td><td>同输入与种子可复现；快进、关动画和不同帧率不改变结果</td></tr></table></div>
+<p>待数值方案补齐：EXP 充能事件与阈值、每局预计施放次数、自动等待窗口、蓝瓜子消耗、回响产出与等级、变身器各模板数值。</p>
+<p>参考：<span class="doc-ref" title="本地文档（线上不可用）">启程技能解锁与升级</span> · <span class="doc-ref" title="本地文档（线上不可用）">战斗演算与动画</span> · <span class="doc-ref" title="本地文档（线上不可用）">角色状态与控制</span> · <span class="doc-ref" title="本地文档（线上不可用）">伤害结算</span> · <span class="doc-ref" title="本地文档（线上不可用）">PVP 回包结构</span></p>
+<p>文件沿用 V1.0 路径以保持已有链接，正文为 <strong>V1.1 图解修订版</strong>。<span class="doc-ref" title="本地文档（线上不可用）">修改前版本</span>。</p>
+</section>
+</main><footer>图示不依赖网络；与 Markdown 正文共用同一套图形及规则。固定职业：守御、格斗、突袭、远击、超能、支援。</footer>
+</div>
+
+<script>
+function switchTab(name){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.toggle('active', b.getAttribute('data-tab')===name);});
+  var el=document.getElementById('panel-'+name);
+  if(el) el.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
