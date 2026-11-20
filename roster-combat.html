@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>奥特曼星域之光 · 初版角色大名单 &amp; 战斗系统框架</title>
+<title>奥特曼星域之光 · 角色名单 / 战斗框架 / 挂机付费框架</title>
 <style>
 :root{--ink:#162b3b;--muted:#526677;--accent:#167b65;--line:#dde5e8;--bg:#f1f4f5}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 "Microsoft YaHei UI","Microsoft YaHei",sans-serif}a{color:#1e638d;text-underline-offset:3px}header{padding:42px 38px 32px;max-width:1280px;margin:auto}header .eyebrow{color:var(--accent);font-size:14px;font-weight:700;letter-spacing:2px}h1{font-size:38px;line-height:1.3;margin:12px 0}header p{color:var(--muted);margin:10px 0}nav{display:flex;flex-wrap:wrap;gap:9px 22px;margin-top:20px}nav a{font-size:15px;text-decoration:none}main{max-width:1280px;margin:auto;padding:0 20px 60px}section{background:white;padding:30px 24px;margin:0 0 24px;border-radius:14px;border:1px solid var(--line);scroll-margin-top:20px}h2{font-size:25px;margin:0 0 8px}p{margin:10px 0}.lead{color:var(--muted);margin-bottom:22px}.figure{margin:18px 0 28px;max-width:100%;overflow:auto}.figure svg{display:block;width:100%;height:auto}.figlink{text-align:right;font-size:13px;color:var(--muted);margin-top:5px}.table-wrap{max-width:100%;overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:12px}th{color:#285b9e;background:#f1f6fb}td:first-child{font-weight:600;min-width:150px}details{border-top:1px solid var(--line);padding-top:15px;margin-top:16px}summary{font-weight:700;color:var(--accent);cursor:pointer}details[open] summary{margin-bottom:16px}.key{display:flex;gap:12px;flex-wrap:wrap}.key span{padding:5px 12px;border-radius:7px;font-size:14px;background:#eaf2ff}.key span:nth-child(2){background:#fff4d9}.key span:nth-child(3){background:#f0ebfc}footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 20px 40px}button{font:inherit;padding:7px 14px;background:#167b65;border:0;border-radius:6px;color:white;cursor:pointer}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #daaa37;outline-offset:4px}
@@ -13,7 +13,7 @@
 <style>
 /* ==== Tab 分页（本页新增） ==== */
 .tabbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--line);
-  display:flex;gap:10px;padding:12px 20px;box-shadow:0 2px 10px rgba(22,43,59,.06)}
+  display:flex;gap:10px;padding:12px 20px;box-shadow:0 2px 10px rgba(22,43,59,.06);flex-wrap:wrap}
 .tabbar .brand{font-weight:800;color:var(--ink);font-size:16px;margin-right:8px;align-self:center;
   letter-spacing:1px}
 .tabbtn{font:inherit;font-weight:700;font-size:15px;padding:9px 20px;border-radius:8px;
@@ -31,6 +31,45 @@ ul,ol{padding-left:24px;margin:10px 0}
 li{margin:4px 0}
 .tabbar .brand span{color:var(--accent)}
 .doc-ref{color:#8a97a3;border-bottom:1px dashed #c3cdd6;cursor:default}
+
+/* ==== 流程图（mermaid 转卡片） ==== */
+.flow-diagram{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fbfdfd;margin:16px 0}
+.flow-start{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center}
+.flow-rows{margin-top:12px}
+.flow-row{display:grid;grid-template-columns:1fr 28px 1fr;align-items:center;margin:8px 0}
+.flow-node{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;
+  font-size:13.5px;line-height:1.5;color:var(--ink)}
+.flow-node.head{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;text-align:center}
+.flow-node.diag{background:#eaf4f1;border-color:var(--accent);font-weight:700;text-align:center;color:#0f5c4c}
+.flow-node.side{color:var(--muted);background:#f7fafb;text-align:center}
+.flow-arw{text-align:center;color:var(--accent);font-weight:700;font-size:16px}
+.paid{display:block;margin-top:6px;font-size:12px;color:#a2600c;background:#fdf6e9;
+  border:1px dashed #e3c48b;border-radius:6px;padding:3px 8px}
+.paid.free{color:#3c7a5f;background:#eef7f2;border-color:#b6d9c7}
+.flow-merge{margin-top:12px;text-align:center;font-size:13.5px;color:#0f5c4c;background:#eaf4f1;
+  border:1px solid #cfe5df;border-radius:9px;padding:10px 12px}
+
+/* ==== 分组卡片（mermaid 子图） ==== */
+.grp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+.grp{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 14px}
+.grp h4{margin:0 0 10px;font-size:14.5px;color:#0f5c4c;border-bottom:1px dashed #cfe5df;padding-bottom:7px}
+.chain{display:flex;flex-direction:column}
+.chip{background:#f4f8f9;border:1px solid var(--line);border-radius:8px;padding:7px 10px;
+  font-size:13px;text-align:center;line-height:1.45}
+.chip.b{background:#eaf4f1;border-color:#cfe5df;font-weight:700;color:#0f5c4c}
+.down{text-align:center;color:var(--accent);font-size:12.5px;line-height:1.6}
+.par{display:flex;flex-direction:column;gap:6px}
+
+/* ==== ASCII 结构块 ==== */
+pre.ascii{background:#f7fafb;border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.7;color:#25414f;
+  margin:14px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace}
+
+@media(max-width:760px){
+  .flow-start,.flow-row{grid-template-columns:1fr}
+  .flow-arw{transform:rotate(90deg);padding:2px 0}
+  .grp-grid{grid-template-columns:1fr}
+}
 @media(max-width:700px){.tabbar{padding:10px 12px;gap:6px}.tabbar .brand{display:none}
   .tabbtn{padding:8px 13px;font-size:14px}}
 @media print{.tabbar{display:none}.panel{display:none!important}.panel.active{display:block!important}
@@ -42,6 +81,7 @@ li{margin:4px 0}
   <div class="brand">奥特曼<span>星域之光</span></div>
   <button class="tabbtn active" data-tab="roster" onclick="switchTab('roster')">初版角色大名单</button>
   <button class="tabbtn" data-tab="combat" onclick="switchTab('combat')">战斗系统框架图解</button>
+  <button class="tabbtn" data-tab="idle" onclick="switchTab('idle')">挂机卡关与付费框架</button>
 </div>
 
 <div class="panel active" id="panel-roster">
@@ -307,7 +347,7 @@ li{margin:4px 0}
 <h2>八、资源核对</h2>
 <ul><li>钢铁武士按詹伯特、火焰战士按红莲火焰处理。出场作品按附件中的 52 人及列出的赛罗小队成员整理。</li><li>加拉特隆MK2按强化型号引用资料。绑定工程资源前需核对资源名为“加拉特隆”的资产是否对应 MK2。</li><li>黑暗洛普斯赛罗需区分改版原型机与量产型黑暗洛普斯，首发采用原型机（独眼、次元核心），量产型另行规划。</li></ul>
 <ul><li>本轮替换角色需核对各自模型、形态与资源编号；不能复用泰迦、托雷基亚、艾雷王、伽古拉、黑暗特利迦、卡露蜜拉的资源编号或技能配置。</li><li>哥莫拉、雷德王均需准备基础形态与对应EX形态的模型、动画及特效，并为进化后的大招、技能1、技能2配置独立技能表现；仍各计1名可收集角色。</li></ul></main>
-<footer>名单 v1.9 ｜ 与战斗系统框架图解同源整合 ｜ 待评审</footer>
+<footer>名单 v1.10 ｜ 与战斗系统框架图解、挂机付费框架同源整合 ｜ 待评审</footer>
 </div>
 
 <div class="panel" id="panel-combat">
@@ -1029,6 +1069,223 @@ li{margin:4px 0}
 <p>文件沿用 V1.0 路径以保持已有链接，正文为 <strong>V1.1 图解修订版</strong>。<span class="doc-ref" title="本地文档（线上不可用）">修改前版本</span>。</p>
 </section>
 </main><footer>图示不依赖网络；与 Markdown 正文共用同一套图形及规则。固定职业：守御、格斗、突袭、远击、超能、支援。</footer>
+</div>
+
+<div class="panel" id="panel-idle">
+<header><div class="eyebrow">ULTRAMAN PROJECT / IDLE LOOP &amp; MONETIZATION</div><h1>挂机卡关与成长付费框架梳理</h1><p>版本：V1.0｜2026-11-20｜性质：产品诊断与框架建议</p><p>卡关诊断 · 四条成长路径 · 免费来源与付费入口对齐</p><nav aria-label="框架章节导航"><a href="#idle-overview">一、框架概览</a> · <a href="#idle-observations">二、六项观察与系统问题</a> · <a href="#idle-stall">三、卡关时的真实选择结构</a> · <a href="#idle-monetization">四、计费系统与成长系统如何接上</a> · <a href="#idle-target">五、框架目标与系统分工</a> · <a href="#idle-ux">六、体验闭环与玩家界面</a> · <a href="#idle-principles">七、关键设计原则</a> · <a href="#idle-metrics">八、可观察的产品指标</a> · <a href="#idle-fleet">九、与移动母舰方案的衔接</a></nav></header>
+<main><a id="idle-overview"></a>
+<h2>一、框架概览</h2>
+<p>挂机产品不是“挂机收益 + 抽卡”两个系统并列。玩家在卡关点需要看懂：卡在哪里、哪些方式能改善、每种方式要花多少时间／资源／钱，以及投入后是否仍有其他可走路径。</p>
+
+<div class="flow-diagram">
+  <div class="flow-start">
+    <div class="flow-node head">挂机战斗与关卡推进</div>
+    <div class="flow-arw">→</div>
+    <div class="flow-node diag">卡关诊断</div>
+    <div class="flow-arw">→</div>
+    <div class="flow-node side">四条路径分流</div>
+  </div>
+  <div class="flow-rows">
+    <div class="flow-row">
+      <div class="flow-node">等级与共鸣<span class="paid">付费输入：加速通行证 / 限时资源</span></div>
+      <div class="flow-arw">→</div>
+      <div class="flow-node">基础资源：挂机稳定产出</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node">角色品阶／技能／专武／回响<span class="paid">付费输入：永久高价值养成</span></div>
+      <div class="flow-arw">→</div>
+      <div class="flow-node">角色卡池与永久养成</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node">装备与战斗配置<span class="paid">付费输入：赛季玩法 / 临时装备</span></div>
+      <div class="flow-arw">→</div>
+      <div class="flow-node">装备成长：常规来源＋可见补充</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-node">阵容、站位与战术<span class="paid free">无付费入口：免费知识 + 试错体验</span></div>
+      <div class="flow-arw">→</div>
+      <div class="flow-node">阵容建议、试用与战斗复盘</div>
+    </div>
+  </div>
+  <div class="flow-merge">四条路径汇合 → <b>再次挑战</b> → 回到「挂机战斗与关卡推进」（闭环）</div>
+</div>
+
+<p>图中的资源和付费都是不同的解法。卡关诊断决定玩家先看哪条路；可见入口决定玩家知道哪些路存在；稳定产出与限时购买决定玩家能多快走完。三者断开时，玩家会觉得“系统很多，但我不知道从哪里成长，也不知道钱能买什么”。</p>
+<h3>核心判断</h3>
+<p>玩家的痛点由三类缺口叠加而成：</p>
+<ol><li><strong>节奏差异缺口</strong>：卡档将进度奖励分段，早到的玩家主要先拿固定奖励；后续追赶者并不必然以同样比例永久落后。领先的价值更接近“提前取得资源和排名窗口”，而非长期占有更高的日常资源斜率。</li><li><strong>成长可见性缺口</strong>：卡关后经验、装备和其他成长材料分散在挂机、成就、任务、首通与限次入口，玩家没有一个可信的全局解法面板。</li><li><strong>愿付需求与可买商品缺口</strong>：玩家有战力提升意愿，但赛季装备／回响更迭或重置，叠加稳定购买入口缺失，使“我愿意花钱”与“这里有适合我买的东西”分离。</li></ol>
+<a id="idle-observations"></a>
+<h2>二、六项观察与系统问题</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>玩家侧观察</th><th>当前体验</th><th>对应的系统缺口</th></tr></thead>
+<tbody>
+<tr><td>1. 主要计费围绕角色卡池、角色养成和加速通行证</td><td>抽取角色、培养角色和缩短等待是主要购买理由</td><td>核心付费与角色成长耦合，其他成长模块没有同样清楚的商品与购买时机</td></tr>
+<tr><td>2. 重氪集中在品阶、专武、回响及附属模块</td><td>深度付费主要加深已有核心角色与附属养成</td><td>高价值养成路线偏窄；购买理由依赖少量明星角色与高段位追求</td></tr>
+<tr><td>3. 多段卡档允许重氪领跑，但资源产出大体固定</td><td>领跑者提前取得阶段奖励；追赶者可以随后拿到同类资源</td><td>竞争优势集中在时间与排名窗口，未必形成长期资源产出优势；这是公平追赶设计，也限制持续加速的价值表达</td></tr>
+<tr><td>4. 卡关想升角色等级，但经验入口分散且难以感知</td><td>挂机最直观；其他经验可能要完成任务、成就或挑战后才发现</td><td>缺少“当前短板 → 所有可得资源 → 每种来源数量／条件 → 一键跳转”的统一入口</td></tr>
+<tr><td>5. 想用装备、回响补战力，却找不到明确购买方式</td><td>相关养成迭代快且可能赛季重置；愿付玩家不易找到可信补充</td><td>时效性、购买可见性与商品价值没有对齐；购买后的保值预期不足</td></tr>
+<tr><td>6. 卡关有时由阵容和站位决定</td><td>玩家自行换人、改位、重试，逐步碰出解法</td><td>战斗信息不能充分解释“为什么输、换什么可能有效”；阵容知识难传递，试错成本偏高</td></tr>
+</tbody></table></div>
+<h3>关系链</h3>
+<pre class="ascii">关卡难度上升
+   ├─ 数值不足 → 要等资源／找不到资源入口 → 对加速付费的收益不确定
+   ├─ 角色深度不足 → 抽取或升阶，但购买决策集中在少数角色
+   ├─ 装备或回响不足 → 赛季时效和补充入口不清晰 → 付费动机被削弱
+   └─ 阵容不适配 → 不知道换谁／站哪 → 反复试错，误以为只能继续堆数值</pre>
+<p>因此，<strong>卡关不是一个单一的数值问题</strong>。产品需要先诊断失败成因，再展示对应成长与策略路径；付费选项应在对应路径上出现，并标明成本、持续期与替代来源。</p>
+<a id="idle-stall"></a>
+<h2>三、卡关时的真实选择结构</h2>
+<p>卡关后可行动的路径应分为数值、策略、资源和时效四类；不同玩家不应被同一个“升英雄”按钮笼统承接。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>路径</th><th>什么时候有效</th><th>入口应该展示什么</th><th>计费关系</th></tr></thead>
+<tbody>
+<tr><td>等待挂机</td><td>共鸣经验、粉尘等稳定收入不足</td><td>当前速度、累计上限、预计到达下一等级时间</td><td>加速通行证或有限额外领取可缩短等待；明确上限和免费等待方案</td></tr>
+<tr><td>领取可得资源</td><td>任务、成就、章节首通、活动或限时商店仍有资源</td><td>资源名称、数量、达成条件、剩余期限、直达入口</td><td>先让玩家看清已有可领取资源；不能把已拥有资源藏在付费推荐下面</td></tr>
+<tr><td>提升英雄</td><td>品阶、专武、技能、角色回响能改变战斗表现</td><td>当前差距、下个节点、消耗、获得变化</td><td>角色卡池与永久养成作为主要高价值付费路径</td></tr>
+<tr><td>提升装备</td><td>装备等级、套装或属性确实是本关瓶颈</td><td>装备缺口、当前可稳定获得来源、每周产量和材料缺口</td><td>临时装备补充可售，但购买必须清楚标出赛季期限与替代产出</td></tr>
+<tr><td>调整阵容</td><td>伤害类型、射程、控制、治疗、保护或站位不适配</td><td>战报解释、可替换角色、站位建议、实际验证</td><td>主要是免费知识与试错体验；可售试用角色／阵容工具不能变成唯一解</td></tr>
+<tr><td>回看战斗</td><td>输在开局减员、技能落空、超时或目标选择</td><td>一页摘要加关键事件，而非只显示总战力</td><td>付费提升和战术提升的收益分开显示，避免误导</td></tr>
+</tbody></table></div>
+<h3>诊断最小闭环</h3>
+<pre class="ascii">挑战失败
+  → 分类：时间耗尽／队员快速阵亡／输出不足／关键技能未命中／目标选择不佳
+  → 对应原因：攻击或防御缺口／控制抗性／范围与站位／目标条件／养成缺失
+  → 提供两条以上可行路径：免费资源、阵容调整、常规玩法、付费加速（如适用）
+  → 预览需要时间、材料、赛季期限和预计改善点
+  → 一键跳转或快速试阵
+  → 再战后比较结果</pre>
+<p>多原因并存时排序最能解释本次失败的 1–3 项，允许展开更多详情。不要仅因为总战力低就把所有失败诊断成数值不足，也不要承诺换某英雄必胜。</p>
+<a id="idle-monetization"></a>
+<h2>四、计费系统与成长系统如何接上</h2>
+<h3>4.1 形成不同价值层</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>价值层</th><th>玩家想解决的问题</th><th>适配商品／商品内容</th><th>购买沟通要求</th></tr></thead>
+<tbody>
+<tr><td>获取层</td><td>想要某个英雄或扩展阵容选择</td><td>卡池、定向招募、可规划的角色碎片</td><td>展示概率、保底、获得进度和错过后安排</td></tr>
+<tr><td>永久成长层</td><td>希望长期投入到喜爱的角色</td><td>品阶、专武、角色回响及其他永久角色深度</td><td>每一步解锁／强化了什么，材料差距和长期价值</td></tr>
+<tr><td>节奏层</td><td>现在就想继续提升</td><td>共鸣经验、突破材料、限次挂机补领、加速通行证</td><td>说明额度、刷新、购买次数、多久可自然取得</td></tr>
+<tr><td>装备构筑层</td><td>需要一套装备或补齐材料</td><td>持续掉落、定向材料、阶段通行证和限量直购</td><td>直接说明是否赛季重置，商品不模糊暗示永久保值</td></tr>
+<tr><td>选择与便利层</td><td>需要更容易试阵、管理资源</td><td>预设阵容位、装备方案保存、战报分析、便利订阅</td><td>不能把核心战术信息藏起来再卖给玩家</td></tr>
+<tr><td>收藏展示层</td><td>想展示角色／舰队情感投入</td><td>外观、动作、语音、母舰及附属飞船外观</td><td>外观与战力明确区分，赛季收藏写清归属</td></tr>
+</tbody></table></div>
+<h3>4.2 永久资产与赛季资产分工</h3>
+<p>本项目之前已确定：英雄品阶、专武、角色回响按永久线设计；赛季重心继续放在赛季装备、阶段资源、赛季挑战与主题收藏。变身器同样永久保留。新的收费设计要与这条分工一致：</p>
+<ul><li><strong>重度付费主轴</strong>：定向角色获取与永久角色深度培养，使高投入有持续资产和可预期目标。</li><li><strong>中度付费主轴</strong>：月度／赛季预算明确的角色卡池计划、阶段养成包、外观收藏、可规划的队伍深度。</li><li><strong>轻度付费主轴</strong>：通行证、低额月卡和小额资源包，提供稳定价值与有限时间加速。</li><li><strong>赛季商品主轴</strong>：赛季装备和回响可作为当季策略工具销售；如果每季结束回收，商品要按期限价值定价、限制重复逼购，并提供免费构筑路线。</li><li><strong>辅助收入</strong>：舰队外观、收藏、生活互动与便利功能拓宽题材消费，不把所有收入压力塞回角色抽卡。</li></ul>
+<p>短期装备即使能卖，也未必适合承载高价永久投资。反过来，临时性本身也不等于不能付费；关键是价格、持续期、获取保底和失败后的补偿是否让玩家预期一致。</p>
+<h3>4.3 卡档追赶与付费价值</h3>
+<p>固定产出的阶段奖励适合平衡服务器进度、缩小纯资源差距，但让高投入的价值主要表现为提前领取。为避免“氪了只早几天、之后都一样”的挫败，需要明确三种不同价值：</p>
+<ol><li><strong>进度时间</strong>：能提前打到哪一段，先体验什么内容。</li><li><strong>竞争窗口</strong>：排名、限时挑战或公会目标中，提前成长能换得什么可见奖励。</li><li><strong>长期资产</strong>：角色、专武、角色回响、永久变身器或收藏在赛季之后仍留下什么。</li></ol>
+<p>服务器追赶不应追收永久角色资产。追赶资源补偿的是同赛季的可玩进度；永久成长目标保留玩家长期投入的价值。</p>
+<a id="idle-target"></a>
+<h2>五、框架目标与系统分工</h2>
+
+<div class="grp-grid">
+  <div class="grp">
+    <h4>核心成长闭环 ｜ 不依赖其他模块</h4>
+    <div class="chain">
+      <div class="chip b">挂机战斗</div>
+      <div class="down">↓</div>
+      <div class="chip">稳定经验／粉尘／金币与装备来源</div>
+      <div class="down">↓</div>
+      <div class="chip">等级／共鸣／英雄与装备成长</div>
+      <div class="down">↺ 回流</div>
+      <div class="chip b">回到挂机战斗</div>
+    </div>
+  </div>
+  <div class="grp">
+    <h4>卡关支援层</h4>
+    <div class="chain">
+      <div class="chip b">失败诊断与战报</div>
+      <div class="down">↓ 分流</div>
+      <div class="par">
+        <div class="chip">可领取资源导航</div>
+        <div class="chip">阵容与站位建议／快速试阵</div>
+        <div class="chip">可选加速与成长商品</div>
+      </div>
+    </div>
+  </div>
+  <div class="grp">
+    <h4>永久资产层</h4>
+    <div class="chain">
+      <div class="chip b">角色卡池</div>
+      <div class="down">↓</div>
+      <div class="chip">品阶与技能／专武／角色回响</div>
+      <div class="down">↓ 接入核心成长</div>
+      <div class="chip">舰队／关系／收藏</div>
+      <div class="down">↓</div>
+      <div class="chip">长期目标与主题内容</div>
+    </div>
+  </div>
+  <div class="grp">
+    <h4>赛季内容层</h4>
+    <div class="chain">
+      <div class="chip b">新地图、敌人与赛季规则</div>
+      <div class="down">↓</div>
+      <div class="chip">赛季装备／临时构筑／积分券</div>
+      <div class="down">↓ 接入挂机战斗 ／ ↓ 产出</div>
+      <div class="par">
+        <div class="chip">回到挂机战斗</div>
+        <div class="chip">主题外观与收藏</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>模块</th><th>核心职责</th><th>主要产出／作用</th><th>不能造成的结果</th></tr></thead>
+<tbody>
+<tr><td>挂机主线</td><td>提供可预期的战斗、经验和循环成长</td><td>主要经验与基础材料、常规装备持续来源</td><td>玩家不玩舰队或地图就无法升级</td></tr>
+<tr><td>角色卡池与永久养成</td><td>形成收集和长期付费深度</td><td>角色、品阶、专武、角色回响</td><td>一次获得角色就把全部长期成长删掉</td></tr>
+<tr><td>卡关导航</td><td>把隐藏来源变成玩家能找到的路线</td><td>任务和玩法跳转、材料缺口、建议行动</td><td>为卖礼包而掩盖免费已得资源</td></tr>
+<tr><td>阵容学习</td><td>解释战斗结果并降低无效重试</td><td>站位、技能范围、克制／机制提示、试阵</td><td>把所有解法都锁在付费英雄上</td></tr>
+<tr><td>赛季养成</td><td>给当季构筑和关卡新鲜感</td><td>装备、回响、临时强化、主题玩法</td><td>赛季重置时抹掉永久角色和舰队投入</td></tr>
+<tr><td>母舰、星球与好感</td><td>长线主题、运营和叙事承载</td><td>建设、收藏、关系、舰队外观及补充资源</td><td>成为共鸣升级和挂机推进的强制门槛</td></tr>
+</tbody></table></div>
+<a id="idle-ux"></a>
+<h2>六、体验闭环与玩家界面</h2>
+<h3>6.1 卡关页要回答五个问题</h3>
+<ol><li>我这次为什么输？</li><li>什么改变最可能有效：等级、角色技能、装备还是阵容？</li><li>现在哪些免费奖励或任务已可领取？</li><li>自然收集这些资源要多久；有哪些加速选择，额度和价格是什么？</li><li>赛季结束后这件商品／装备／回响会不会保留？</li></ol>
+<h3>6.2 资源入口架构</h3>
+<p>每种成长资源有“资源说明页”，列出稳定来源、周期、一次性来源、限购次数、当前已领取与下次刷新，并可跳转。成就与引导奖励继续存在，但都进入同一资源索引，不成为只有玩家偶然点开才发现的隐藏经济。</p>
+<p>挂机奖励页同时显示当前关卡档位与收益构成；额外领取按钮旁显示每日可购买次数、当次资源拆分和上限，不用玩家先购买才知道经验有多少。</p>
+<h3>6.3 阵容试错工具</h3>
+<ul><li>保存多个阵容和站位预设，训练／重试不消耗关键资源。</li><li>战报提示首个减员时间、主要伤害来源、技能命中／落空、控制生效情况与最后胜负原因。</li><li>给 1–3 个明确的可尝试方向，例如“把远击位移到另一列，避开开场直线技能”或“试用一个能打断蓄力的单位”。</li><li>允许同条件快速重播，显示本次相对上次改变的要素；系统建议保持可跳过，不代替玩家布阵。</li><li>对不同方案使用实战结果而非未经解释的“推荐战力”打分，避免误导。</li></ul>
+<h3>6.4 商品呈现时机</h3>
+<p>商品在已经解释的需求旁出现：缺角色时展示目标获取进度；经验不足时展示免费来源与有上限的加速选项；装备短缺时展示稳定产出和明确的限时补充；想要外观时展示永久归属。所有推荐都能关闭，不阻止查看免费途径。</p>
+<a id="idle-principles"></a>
+<h2>七、关键设计原则</h2>
+<ol><li><strong>资源来源可见</strong>：获得经验或装备前后都有来源记录，玩家不用靠事后猜测。</li><li><strong>自然成长可计划</strong>：显示当前积累速度、收益上限和到达目标的大致时间。</li><li><strong>付费买到明确价值</strong>：明确是角色、永久成长、时间、当季构筑还是外观，并标明期限与获取替代。</li><li><strong>卡档缩短差距，不抹平资产</strong>：阶段资源可以追赶，永久角色养成和收藏留下来。</li><li><strong>数值门槛与战术门槛并存</strong>：玩家既可以培养，也能通过理解机制改进结果。</li><li><strong>阵容知识可发现</strong>：告诉玩家敌人机制、可行的反制方向和试用入口，不强迫唯一答案。</li><li><strong>核心和支线不互相绑架</strong>：挂机与英雄基础成长不依赖舰队、地图、好感或赛季收藏。</li><li><strong>成就奖励仍有价值但不隐身</strong>：成就可承担阶段奖励，不应代替常规资源面板与稳定供给。</li><li><strong>限额明示</strong>：每日购买上限、补领次数、通行证周期和赛季重置时点在购买前展示。</li><li><strong>同一资源有主来源和补充来源</strong>：主来源保证长期可持续，支线提供额外节奏与主题奖励。</li></ol>
+<a id="idle-metrics"></a>
+<h2>八、可观察的产品指标</h2>
+<p>先记录基线，再按关卡区间、付费层级、新老赛季和卡关原因切片；不预设没有数据支持的目标数值。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>问题</th><th>建议观测</th></tr></thead>
+<tbody>
+<tr><td>玩家是否看见成长途径</td><td>卡关页打开率、来源列表点击率、可领资源发现率、导航完成率</td></tr>
+<tr><td>付费是否解决已知需求</td><td>推荐商品点击／购买后目标达成率、免费／付费路径的转化与退出</td></tr>
+<tr><td>卡档是否带来有意义领跑</td><td>早期奖励领取时点、卡档前后留存、追赶耗时、排名奖励差距</td></tr>
+<tr><td>装备短缺是否成为断供</td><td>分装备等级的材料缺口、无可重复来源的天数、装备升级停滞人数</td></tr>
+<tr><td>阵容试错是否可学习</td><td>重试次数、站位／英雄变更比例、诊断打开后胜率变化、退出率</td></tr>
+<tr><td>长期商品是否有保值感</td><td>永久资产获取后跨赛季使用率、赛季商品购买后使用时长和评价</td></tr>
+<tr><td>资源入口是否过度分散</td><td>奖励领取前后页面数、遗漏率、资源索引覆盖率</td></tr>
+</tbody></table></div>
+<p>指标用于找到断点，不能把“点击更多礼包”当作唯一成功标准。若卡关页提高了购买点击但同时提高退出率，说明推荐可能加重压迫感。</p>
+<a id="idle-fleet"></a>
+<h2>九、与移动母舰方案的衔接</h2>
+<p>本项目已有的母舰远征方案明确挂机为主核心，并规定舰队、地图和每日需求不能成为升级共鸣或挂机推进的前置门槛。因此，本稿将第 4、5、6 点转成界面要求与系统合同，不改动该主次关系：</p>
+<div class="table-wrap"><table>
+<thead><tr><th>问题</th><th>母舰方案中的承接点</th><th>本稿补上的体验要求</th></tr></thead>
+<tbody>
+<tr><td>挂机经验难找</td><td>挂机与共鸣提供基础成长，来源可重复</td><td>卡关时显示资源来源、数量、刷新与直达入口</td></tr>
+<tr><td>任务奖励过散</td><td>地图、舰队需求提供额外物资</td><td>奖励进入统一索引，并标清一次性或持续产出</td></tr>
+<tr><td>装备和回响缺少购买理由</td><td>常规装备须持续供给；赛季构筑有周期</td><td>商品写清期限、稳定替代路径与赛季结束处理</td></tr>
+<tr><td>玩家愿意花钱却无处花</td><td>永久角色深度、角色回响、舰队外观和收藏</td><td>把购买入口锚定具体成长需求，不重复卖被隐藏的免费奖励</td></tr>
+<tr><td>阵容全靠盲试</td><td>战斗系统已有战报与策略方向，可迭代提示</td><td>提供失败分类、试阵和改变前后对比</td></tr>
+<tr><td>赛季追赶令努力贬值</td><td>永久英雄与舰队保留；赛季线回收临时内容</td><td>明确“早拿阶段奖励”的竞争价值与跨季保留资产</td></tr>
+</tbody></table></div>
+<p>关联基准：<span class="doc-ref" title="本地文档（线上不可用）">移动母舰远征：挂机、共鸣、舰队、探索与赛季一体化设计</span> · <span class="doc-ref" title="本地文档（线上不可用）">奥特曼项目战斗系统框架图解</span>。</p>
+<blockquote>文档边界：这是根据用户描述形成的产品框架与设计建议。启程具体经验来源、限购逻辑、卡档产出率和装备／回响入口如需做“原游戏事实审计”，应另以本地配置与实际界面逐项核实，不从本稿推断。</blockquote></main>
+<footer>挂机卡关与成长付费框架梳理 V1.0 ｜ 2026-11-20 ｜ 待评审</footer>
 </div>
 
 <script>
